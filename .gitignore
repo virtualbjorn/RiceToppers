@@ -1,0 +1,21 @@
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+app/tns_module/*
+.cloud/*
+.tmp_backup/*
+platforms/*
+node_modules/*
+functions/node_modules/*
+app/**/*.component.js
+app/**/*.module.js
+app/**/*.routing.js
+app/**/**/*.routing.js
+app/**/**/*.service.js
+app/*.js
+app/**/*.js
+app/**/**/*.js
