@@ -32,7 +32,7 @@ export class OrderComponent {
         let options: ModalDialogOptions = {
             viewContainerRef: this.vcRef,
             context: this.orderDataService.orderCart,
-            fullscreen: false
+            fullscreen: true
         };
         if(await this._modalDialog.showModal(CartModalComponent, options)) {
             this.orderDataService.resetOrders();
