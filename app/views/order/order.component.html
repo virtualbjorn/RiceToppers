@@ -1,0 +1,20 @@
+<ActionBar title="Food Menu" icon="" class="action-bar">
+    <ActionItem (tap)="openCartModal()" ios.position="right" android.position="actionBar">
+        <Button text="&#xf07a;" class="fa actionbar-action-items"></Button>
+    </ActionItem>
+</ActionBar>
+<StackLayout>
+    <Label text="PICK YOUR TOPPINGS" textWrap="true" class="h3 food-menu-header"></Label>
+    <ScrollView>
+        <GridLayout rows="auto,auto,auto,auto">
+            <Image src="~/assets/img/product/Product 1.jpg" row="0" (tap)="openFoodModal('Product 1')" class="food-container-image"></Image>
+            <Label text="Product 1" row="0" textWrap="true" class="food-label"></Label>
+            <Image src="~/assets/img/product/Product 2.jpg" row="1" (tap)="openFoodModal('Product 2')" class="food-container-image"></Image>
+            <Label text="Product 2" row="1" textWrap="true" class="food-label"></Label>
+            <Image src="~/assets/img/product/Product 3.jpg" row="2" (tap)="openFoodModal('Product 3')" class="food-container-image"></Image>
+            <Label text="Product 3" row="2" textWrap="true" class="food-label"></Label>
+            <Image src="~/assets/img/product/Product 4.jpg" row="3" (tap)="openFoodModal('Product 4')" class="food-container-image"></Image>
+            <Label text="Product 4" row="3" textWrap="true" class="food-label"></Label>
+        </GridLayout>
+    </ScrollView>
+</StackLayout>

@@ -1,0 +1,12 @@
+<GridLayout rows="auto,auto,auto,auto,auto,auto">
+    <Label [text]="selectedProductData.productName" row="0" textWrap="true" class="h3 modal-label-center"></Label>
+    <Image src="~/assets/img/product/{{selectedProductData.productName}}.jpg" row="1"></Image>
+    <Label text="Php {{selectedProductData.productPrice}}.00" row="2" textWrap="true" class="h5 modal-label-center"></Label>
+    <Label text="Php {{selectedProductData.totalPrice}}.00" row="3" textWrap="true" class="h4 modal-label-center font-weight-bold bg-primary total-price-label"></Label>
+    <FlexboxLayout alignItems="center" justifyContent="center" row="4">
+        <Button text="&#xf068;" (tap)="updatePiecesToOrder('-')" isEnabled="{{selectedProductData.piecesToOrder > 0}}" class="fa update-btn"></Button>
+        <TextField hint="0" [(ngModel)]="selectedProductData.piecesToOrder" keyboardType="number" (ngModelChange)="updatePrice()" editable="false" class="pieces-to-order-holder"></TextField>
+        <Button text="&#xf067;" (tap)="updatePiecesToOrder('+')" class="fa update-btn"></Button>
+    </FlexboxLayout>
+    <Button text="&#xf217;" (tap)="addOrder()" row="5" class="fa btn btn-primary btn-rounded-lg modal-button-add"></Button>
+</GridLayout>

@@ -1,0 +1,49 @@
+.cart-width {
+    width: 95%;
+    min-width: 80%;
+    min-height: 100;
+}
+
+.total-amount-container {
+    border-top-width: 1;
+    border-top-color: #888888;
+    vertical-align: bottom;
+}
+
+.cart-food-detail-container {
+    margin: 5 0 5 10; 
+}
+
+.cart-food-detail-label-bold {
+    font-weight: bold;
+}
+
+.cart-total-amount {
+    margin-right: 2;
+}
+
+.cart-total-amount-label {
+    margin-left: 3;
+}
+
+.cart-total-amount-position {
+    vertical-align: center;
+    horizontal-align: right;
+}
+
+.cart-check-out {
+    font-size: 17;
+    padding-top: 5;
+    padding-bottom: 5;
+    margin: 0 0 0 0;
+}
+
+.cart-detail-container {
+    margin-bottom: 2;
+}
+
+.cart-empty {
+    font-size: 50;
+    color: #888888;
+    margin: 50 50 50 50;
+}

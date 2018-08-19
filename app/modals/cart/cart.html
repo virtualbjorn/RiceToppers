@@ -1,0 +1,19 @@
+<StackLayout class="cart-width">
+    <ScrollView *ngIf="orderCart.orderData.length > 0">
+        <StackLayout>
+            <GridLayout rows="auto" columns="100,*" class="cart-detail-container" *ngFor="let product of orderCart.orderData">
+                <Image src="~/assets/img/product/{{product.productName}}.jpg" rowSpan="2" row="0" col="0"></Image>
+                <StackLayout col="1" class="cart-food-detail-container">
+                    <Label text="{{product.productName}}" textWrap="true" class="h4 cart-food-detail-label-bold"></Label>
+                    <Label text="Price: {{product.productPrice}}   Qty: {{product.piecesToOrder}}"class="h5"></Label>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+    <GridLayout rows="auto" columns="auto,*,125" class="total-amount-container" *ngIf="orderCart.totalAmountPayable > 0">
+        <Label text="Total:" col="0" textWrap="true" class="h4 cart-food-detail-label-bold cart-total-amount-position cart-total-amount-label"></Label>
+        <Label text="Php{{orderCart.totalAmountPayable}}.00" col="1" textWrap="true" class="h3 cart-food-detail-label-bold cart-total-amount cart-total-amount-position"></Label>
+        <Button text="CHECK-OUT" (tap)="checkOut()" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button>
+    </GridLayout>
+    <Label text="&#xf07a;" col="0" *ngIf="orderCart.totalAmountPayable == 0" class="fa cart-empty" textWrap="true"></Label>
+</StackLayout>

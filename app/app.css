@@ -10,3 +10,24 @@ of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
 @import '~nativescript-theme-core/css/core.light.css';
+@import './custom.css';
+/* @import './main.scss'; */
+.fa {
+    font-family: "FontAwesome-Solid";
+}
+.actionbar-action-items {
+    padding-right: 0;
+    padding-left: 0;
+    margin: 0 0 0 0;
+    border-color: transparent;
+    background-color: transparent;
+    border-width: 1;
+    width: 40;
+    font-size: 25;
+    color: #ffffff;
+}
+
+.proceed-btn {
+    font-weight: bold;
+    font-size: 18;
+}
