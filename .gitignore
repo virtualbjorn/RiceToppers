@@ -19,3 +19,11 @@ app/**/**/*.service.js
 app/*.js
 app/**/*.js
 app/**/**/*.js
+app/**/*.component.css
+app/**/*.module.css
+app/**/*.routing.css
+app/**/**/*.routing.css
+app/**/**/*.service.css
+app/*.css
+app/**/*.css
+app/**/**/*.css

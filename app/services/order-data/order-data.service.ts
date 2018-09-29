@@ -49,9 +49,11 @@ export class OrderDataService {
     resetOrders() {
         this.orderCart = new OrderCart();
         this.orderData = new Array<OrderData>();
+        this.setProductData();
     }
 
     setProductData() {
+        this.productData = new Array<OrderData>();
         this.productData.push(new OrderData('Product 1', 25, 0 ,0));
         this.productData.push(new OrderData('Product 2', 26, 0 ,0));
         this.productData.push(new OrderData('Product 3', 27, 0 ,0));

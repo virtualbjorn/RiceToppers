@@ -3,7 +3,10 @@
 }
 
 .modal-button-add {
-    font-size: 30;
+    font-size: 50;
+    padding: 10 10 10 10;
+    width: 85;
+    height: 85;
 }
 
 .update-btn {
@@ -16,4 +19,9 @@
 
 .total-price-label {
     padding: 4 4 4 4; border-width: 1; border-radius: 3; border-color: transparent;
+}
+
+.pricing-label {
+    margin-top: 4;
+    margin-bottom: 4;
 }

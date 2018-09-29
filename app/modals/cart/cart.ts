@@ -32,7 +32,12 @@ export class CartModalComponent {
         this.params.closeCallback(true);
     }
 
-    cancelButtonTap() {
-        this.params.closeCallback();
+    removeFromCart(orderDataId: number) {
+        this.orderCart.totalAmountPayable -= this.orderCart.orderData[orderDataId].totalPrice;
+        this.orderCart.orderData.splice(orderDataId, 1);
+    }
+
+    backToFoodMenu() {
+        this.params.closeCallback(false);
     }
 }
