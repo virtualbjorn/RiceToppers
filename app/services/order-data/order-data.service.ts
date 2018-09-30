@@ -7,7 +7,7 @@ export class OrderDataService {
     orderCart: OrderCart = new OrderCart();
     orderData: Array<OrderData> = new Array<OrderData>();
     productData: Array<OrderData> = new Array<OrderData>();
-    
+
     constructor() {
         this.setProductData();
     }
@@ -15,17 +15,17 @@ export class OrderDataService {
     addOrder(orderDetails: OrderData) {
         let totalAmountPayable = 0;
         let isInCart = this.orderData.find((orderDetail) => {
-            if(orderDetail.productName == orderDetails.productName) {
+            if (orderDetail.productName == orderDetails.productName) {
                 orderDetail = orderDetails;
                 return true;
             }
         });
-        if(!isInCart) {
+        if (!isInCart) {
             this.orderData.push(orderDetails);
         }
         this.orderData.map((orderDetail) => {
             totalAmountPayable += orderDetail.totalPrice;
-        })
+        });
         this.orderCart.totalAmountPayable = totalAmountPayable;
         this.orderCart.orderData = this.orderData;
         // console.dir(this.orderCart);
@@ -52,11 +52,20 @@ export class OrderDataService {
         this.setProductData();
     }
 
+    get orderDetails(): string {
+        let orderList: string = 'Order Details:';
+        this.orderCart.orderData.map((order) => {
+            orderList = orderList.concat('\n', `${order.piecesToOrder + (order.piecesToOrder > 1 ? 'pcs' : 'pc')} of ${order.productName} = Php ${order.totalPrice}.00`);
+        });
+        orderList = orderList.concat('\n\n', `Total Amount Payable: Php ${this.orderCart.totalAmountPayable}.00`)
+        return orderList;
+    }
+
     setProductData() {
         this.productData = new Array<OrderData>();
-        this.productData.push(new OrderData('Product 1', 25, 0 ,0));
-        this.productData.push(new OrderData('Product 2', 26, 0 ,0));
-        this.productData.push(new OrderData('Product 3', 27, 0 ,0));
-        this.productData.push(new OrderData('Product 4', 28, 0 ,0));
+        this.productData.push(new OrderData('Product 1', 25, 0, 0));
+        this.productData.push(new OrderData('Product 2', 26, 0, 0));
+        this.productData.push(new OrderData('Product 3', 27, 0, 0));
+        this.productData.push(new OrderData('Product 4', 28, 0, 0));
     }
 }

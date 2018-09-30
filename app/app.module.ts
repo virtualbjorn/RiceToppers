@@ -11,6 +11,7 @@ import { UserDataService } from './services/user-data/user-data.service';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { EmailService } from "~/services/email/email.service";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -37,7 +38,8 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
     providers: [
         OrderDataService,
         NavigationService,
-        UserDataService
+        UserDataService,
+        EmailService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

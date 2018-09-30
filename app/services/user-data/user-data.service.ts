@@ -10,6 +10,10 @@ export class UserDataService {
         this.userData = userData;
     }
 
+    get userDetails(): string {
+        return `Customer Details\nName: ${this.userData.fullName}\nContact Number: ${this.userData.contactNumbers}\nDelivery Address: ${this.userData.deliveryAddress}`;
+    }
+
     get user(): UserData {
         return this.userData;
     }

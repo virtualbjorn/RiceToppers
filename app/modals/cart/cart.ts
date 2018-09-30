@@ -5,6 +5,10 @@ import { OrderCart } from '../../models/order-cart';
 import { OrderDataService } from '../../services/order-data/order-data.service';
 import { UserDataService } from '../../services/user-data/user-data.service';
 import * as dialogs from 'ui/dialogs';
+import * as phone from 'nativescript-phone';
+import * as connectivity from 'connectivity';
+import { EmailService } from '~/services/email/email.service';
+import * as moment from 'moment';
 
 @Component({
     moduleId: module.id,
@@ -14,10 +18,13 @@ import * as dialogs from 'ui/dialogs';
 
 export class CartModalComponent {
     orderCart: OrderCart;
+    orderID: string;
+    orderDetail: string;
+
     constructor(
+        page: Page,
         private params: ModalDialogParams,
-        private page: Page,
-        private ngZone: NgZone,
+        private emailService: EmailService,
         public orderDataService: OrderDataService,
         public userDataService: UserDataService
     ) {
@@ -28,8 +35,17 @@ export class CartModalComponent {
     }
 
     async checkOut() {
-        await dialogs.alert({ message: 'Your order has been sent. You will receive a message confirmation in awhile.', okButtonText: 'OK' });
-        this.params.closeCallback(true);
+        this.orderID = this.userDataService.userData.idNumber + moment().format('MMDDYYHHmm');
+        this.orderDetail = `${this.userDataService.userDetails}\n\n${this.orderDataService.orderDetails}`;
+        if (connectivity.getConnectionType() && this.emailService.checkEmailAvailability) {
+            try {
+                await this.emailService.compose(this.orderDetail, this.orderID);
+            } catch (error) {
+                await phone.sms(['+639162493072'], this.orderDetail);
+            }
+        } else {
+            await phone.sms(['+639162493072'], this.orderDetail);
+        }
     }
 
     removeFromCart(orderDataId: number) {

@@ -34,9 +34,8 @@ export class OrderComponent {
             context: this.orderDataService.orderCart,
             fullscreen: true
         };
-        if(await this._modalDialog.showModal(CartModalComponent, options)) {
-            this.orderDataService.resetOrders();
-            this.navigationService.goBack();
-        }
+        await this._modalDialog.showModal(CartModalComponent, options);
+        this.orderDataService.resetOrders();
+        this.navigationService.goBack();
     }
 }
