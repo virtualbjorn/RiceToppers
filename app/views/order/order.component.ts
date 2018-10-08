@@ -4,6 +4,7 @@ import { ModalDialogService, ModalDialogOptions } from "nativescript-angular";
 import { AddOrderModalComponent } from '../../modals/add-order/add-order';
 import { CartModalComponent } from '../../modals/cart/cart';
 import { NavigationService } from '../../services/navigation/navigation.service';
+import { OrderData } from '~/models/order-data';
 
 @Component({
     selector: "orderPage",
@@ -12,12 +13,15 @@ import { NavigationService } from '../../services/navigation/navigation.service'
     styleUrls: ["./order.component.scss"]
 })
 export class OrderComponent {
+    productList: OrderData[];
     constructor(
         private vcRef: ViewContainerRef,
         private _modalDialog: ModalDialogService,
         private navigationService: NavigationService,
         public orderDataService: OrderDataService
-    ) { }
+    ) {
+        this.productList = orderDataService.productData;
+    }
 
     openFoodModal(productName: string) {
         let options: ModalDialogOptions = {

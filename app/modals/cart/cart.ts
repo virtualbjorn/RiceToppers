@@ -9,6 +9,7 @@ import * as phone from 'nativescript-phone';
 import * as connectivity from 'connectivity';
 import { EmailService } from '~/services/email/email.service';
 import * as moment from 'moment';
+import { UserData } from '~/models/user-data';
 
 @Component({
     moduleId: module.id,
@@ -20,14 +21,16 @@ export class CartModalComponent {
     orderCart: OrderCart;
     orderID: string;
     orderDetail: string;
+    userData: UserData;
 
     constructor(
         page: Page,
         private params: ModalDialogParams,
         private emailService: EmailService,
         public orderDataService: OrderDataService,
-        public userDataService: UserDataService
+        private userDataService: UserDataService
     ) {
+        this.userData = userDataService.user;
         this.orderCart = params.context;
         page.on('unloaded', () => {
             this.params.closeCallback();
@@ -35,16 +38,16 @@ export class CartModalComponent {
     }
 
     async checkOut() {
-        this.orderID = this.userDataService.userData.idNumber + moment().format('MMDDYYHHmm');
+        this.orderID = this.userData.idNumber + moment().format('MMDDYYHHmm');
         this.orderDetail = `${this.userDataService.userDetails}\n\n${this.orderDataService.orderDetails}`;
         if (connectivity.getConnectionType() && this.emailService.checkEmailAvailability) {
             try {
                 await this.emailService.compose(this.orderDetail, this.orderID);
             } catch (error) {
-                await phone.sms(['+639162493072'], this.orderDetail);
+                await phone.sms(['+639262637471'], this.orderDetail);
             }
         } else {
-            await phone.sms(['+639162493072'], this.orderDetail);
+            await phone.sms(['+639262637471'], this.orderDetail);
         }
     }
 

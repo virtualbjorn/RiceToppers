@@ -6,8 +6,15 @@
 <StackLayout>
     <Label text="PICK YOUR TOPPINGS" textWrap="true" class="h3 food-menu-header"></Label>
     <ScrollView>
-        <GridLayout rows="auto,auto,auto,auto">
-            <Image src="~/assets/img/product/Product 1.jpg" row="0" (tap)="openFoodModal('Product 1')" class="food-container-image"></Image>
+        <StackLayout class="food-list-container">
+            <GridLayout columns="*,auto" *ngFor="let product of productList" class="food-item-container">
+                <Label col="0" text="{{product.productName}}" textWrap="true" class="food-item"></Label>
+                <Button col="1" text="&#xf067;" (tap)="openFoodModal(product.productName)" class="fa food-item-add-button"></Button>
+            </GridLayout>
+        </StackLayout>
+
+        <!-- <GridLayout rows="auto,auto,auto,auto">
+            <Image src="~/assets/img/product/Product 1.jpg" row="0" class="food-container-image"></Image>
             <Label text="Product 1" row="0" textWrap="true" class="food-label"></Label>
             <Image src="~/assets/img/product/Product 2.jpg" row="1" (tap)="openFoodModal('Product 2')" class="food-container-image"></Image>
             <Label text="Product 2" row="1" textWrap="true" class="food-label"></Label>
@@ -15,6 +22,6 @@
             <Label text="Product 3" row="2" textWrap="true" class="food-label"></Label>
             <Image src="~/assets/img/product/Product 4.jpg" row="3" (tap)="openFoodModal('Product 4')" class="food-container-image"></Image>
             <Label text="Product 4" row="3" textWrap="true" class="food-label"></Label>
-        </GridLayout>
+        </GridLayout> -->
     </ScrollView>
 </StackLayout>

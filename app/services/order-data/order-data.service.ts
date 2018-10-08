@@ -63,9 +63,16 @@ export class OrderDataService {
 
     setProductData() {
         this.productData = new Array<OrderData>();
-        this.productData.push(new OrderData('Product 1', 25, 0, 0));
-        this.productData.push(new OrderData('Product 2', 26, 0, 0));
-        this.productData.push(new OrderData('Product 3', 27, 0, 0));
-        this.productData.push(new OrderData('Product 4', 28, 0, 0));
+        this.productData.push(new OrderData('Chicken Fillet', 45, 0, 0));
+        this.productData.push(new OrderData('Chicken Cordon Bleu', 45, 0, 0));
+        this.productData.push(new OrderData('Pork Kawali', 45, 0, 0));
+        this.productData.push(new OrderData('Pork Afritada', 45, 0, 0));
+        this.productData.push(new OrderData('Pork Steak', 45, 0, 0));
+        this.productData.push(new OrderData('Pork Sisig', 45, 0, 0));
+        this.productData.push(new OrderData('Pork Humba', 45, 0, 0));
+        this.productData.push(new OrderData('Pork Bico Xpress', 45, 0, 0));
+        this.productData.push(new OrderData('Ampalaya', 45, 0, 0));
+        this.productData.push(new OrderData('Egg (Fried Sunny Side Up)', 45, 0, 0));
+        this.productData.push(new OrderData('Lumpia Shanghai (Pork)', 45, 0, 0));
     }
 }

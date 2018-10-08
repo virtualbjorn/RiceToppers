@@ -20,3 +20,32 @@
     text-align: center;
     font-weight: bold;
 }
+
+.food-list-container {
+    height: 95%;
+    padding: 5 10 5 15;
+    border-width: 2;
+    border-color: #f39237;
+    border-radius: 5;
+    margin: 0 15;
+}
+
+.food-item-container {
+    vertical-align: middle;
+    margin: 5;
+}
+
+.food-item {
+    color: #000000;
+    font-size: 20;
+}
+.food-item-add-button {
+    width: 30;
+    height: 30;
+    border-radius: 50%;
+    border-width: 1;
+    border-color: #092066;
+    background: #092066;
+    padding: 0 0 0 0;
+    color: #ffffff;
+}
