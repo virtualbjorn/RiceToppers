@@ -1,12 +1,35 @@
-<GridLayout rows="auto,auto,auto,auto,auto" columns="*,100" class="add-order-modal-container">
-    <Label [text]="selectedProductData.productName" row="0" colSpan="2" textWrap="true" class="h3 modal-label-center font-weight-bold"></Label>
-    <Image src="~/assets/img/product/{{selectedProductData.productName}}.jpg" row="1" colSpan="2"></Image>
-    <Label text="Php {{selectedProductData.productPrice}}.00" row="2" col="0" textWrap="true" class="h4 modal-label-center pricing-label"></Label>
-    <Label text="Php {{selectedProductData.totalPrice}}.00" row="3" col="0" textWrap="true" class="h3 modal-label-center pricing-label font-weight-bold bg-primary total-price-label"></Label>
-    <FlexboxLayout alignItems="center" justifyContent="center" row="4" col="0" class="pricing-label">
-        <Button text="&#xf068;" (tap)="updatePiecesToOrder('-')" isEnabled="{{selectedProductData.piecesToOrder > 0}}" class="fa update-btn"></Button>
-        <TextField hint="0" [(ngModel)]="selectedProductData.piecesToOrder" keyboardType="number" (ngModelChange)="updatePrice()" editable="false" class="pieces-to-order-holder"></TextField>
-        <Button text="&#xf067;" (tap)="updatePiecesToOrder('+')" class="fa update-btn"></Button>
-    </FlexboxLayout>
-    <Button text="&#xf217;" (tap)="addOrder()" row="2" rowSpan="3" col="1" class="fa btn btn-primary modal-button-add"></Button>
-</GridLayout>
+<StackLayout class="food-list-main-container">
+    <Label text="PICK YOUR TOPPINGS" textWrap="true" class="h3 food-menu-header"></Label>
+    <!-- <FlexboxLayout justifyContent="space-between" alignItems="center" class="combo-container">
+        <Label text="Combo Package" class="combo-text font-weight-bold" textWrap="true"></Label>
+        <Label text="{{isCombo ? 'Yes' : 'No'}}" class="food-item" textWrap="true"></Label>
+        <Switch [checked]="false" (checkedChange)="onComboSwitchChecked($event)" class="switch"></Switch>
+    </FlexboxLayout> -->
+    <GridLayout rows="*,auto" class="food-list-container">
+        <ScrollView row="0">
+            <!-- <ScrollView row="0" style="border-bottom-width: 2; border-bottom-color: #f39237;"> -->
+            <StackLayout class="food-list-container-1">
+                <Checkbox text="{{foodItem.foodName}}" checked="false" class="food-item" (checkedChange)="updateOrderData($event, foodItem)"
+                    isEnabled="{{selectedFoodItem < 2 || foodItem.isSelected}}" *ngFor="let foodItem of foodMenuList"></Checkbox>
+            </StackLayout>
+        </ScrollView>
+        <GridLayout row="1" columns="*,*" #stackContainer class="border-top-list food-list-container-1 hidden">
+            <StackLayout col="0" verticalAlignment="middle" horizontalAlignment="center">
+                <Label text="Php {{orderData.productPrice}}.00" textWrap="true" class="h4 modal-label-center pricing-label"></Label>
+                <Label text="Php {{orderData.totalPrice}}.00" textWrap="true" class="h3 modal-label-center pricing-label font-weight-bold bg-primary total-price-label"></Label>
+                <FlexboxLayout alignItems="center" justifyContent="center" class="pricing-label">
+                    <Button text="&#xf068;" (tap)="updatePiecesToOrder('-')" isEnabled="{{orderData.piecesToOrder > 0}}"
+                        class="fa update-btn"></Button>
+                    <TextField hint="1" [(ngModel)]="orderData.piecesToOrder" keyboardType="number" (ngModelChange)="updatePrice()"
+                        editable="false" class="pieces-to-order-holder"></TextField>
+                    <Button text="&#xf067;" (tap)="updatePiecesToOrder('+')" class="fa update-btn"></Button>
+                </FlexboxLayout>
+            </StackLayout>
+            <Button col="1" text="&#xf217;" (tap)="addOrder()" class="fa modal-button-add"></Button>
+        </GridLayout>
+        <!-- <StackLayout class="food-list-container-1" row="1">
+            <Label text="Addons:" class="food-item" textWrap="true"></Label>
+            <Checkbox text="Rice" checked="false" class="food-item" (checkedChange)="addRice($event)"></Checkbox>
+        </StackLayout> -->
+    </GridLayout>
+</StackLayout>

@@ -12,7 +12,8 @@ import { UserDataService } from './services/user-data/user-data.service';
 // Uncomment and add to NgModule imports if you need to use two-way binding
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { EmailService } from "~/services/email/email.service";
-
+import { FoodMenuService } from "~/services/food-menu-data/food-menu-data.service";
+import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
@@ -23,7 +24,8 @@ import { EmailService } from "~/services/email/email.service";
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        TNSCheckBoxModule
     ],
     declarations: [
         AppComponent,
@@ -39,7 +41,8 @@ import { EmailService } from "~/services/email/email.service";
         OrderDataService,
         NavigationService,
         UserDataService,
-        EmailService
+        EmailService,
+        FoodMenuService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -21,6 +21,11 @@ export class ProfileComponent {
         if (userDataService.isUserData) {
             this.userData = userDataService.user;
         }
+        // this.userData.fullName = "Juan Dela Cruz";
+        // this.userData.idNumber = "20141000000";
+        // this.userData.contactNumbers = "+639123456789";
+        // this.userData.deliveryAddress = "Bldg 42-6/F PAT Bldg";
+        // userDataService.updateUserData(this.userData);
     }
 
     isValidated(): boolean {

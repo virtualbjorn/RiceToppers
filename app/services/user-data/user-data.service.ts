@@ -8,7 +8,6 @@ export class UserDataService {
 
     updateUserData(userData: UserData) {
         this.userData = userData;
-        console.dir(this.userData);
         localStorage.setItemObject('User Data', this.userData);
     }
 

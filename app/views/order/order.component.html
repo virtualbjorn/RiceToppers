@@ -1,27 +1,33 @@
 <ActionBar title="Food Menu" icon="" class="action-bar">
-    <ActionItem (tap)="openCartModal()" ios.position="right" android.position="actionBar">
+    <!-- <ActionItem (tap)="openCartModal()" ios.position="right" android.position="actionBar">
         <Button text="&#xf07a;" class="fa actionbar-action-items"></Button>
-    </ActionItem>
+    </ActionItem> -->
 </ActionBar>
 <StackLayout>
-    <Label text="PICK YOUR TOPPINGS" textWrap="true" class="h3 food-menu-header"></Label>
-    <ScrollView>
-        <StackLayout class="food-list-container">
-            <GridLayout columns="*,auto" *ngFor="let product of productList" class="food-item-container">
-                <Label col="0" text="{{product.productName}}" textWrap="true" class="food-item"></Label>
-                <Button col="1" text="&#xf067;" (tap)="openFoodModal(product.productName)" class="fa food-item-add-button"></Button>
-            </GridLayout>
-        </StackLayout>
-
-        <!-- <GridLayout rows="auto,auto,auto,auto">
-            <Image src="~/assets/img/product/Product 1.jpg" row="0" class="food-container-image"></Image>
-            <Label text="Product 1" row="0" textWrap="true" class="food-label"></Label>
-            <Image src="~/assets/img/product/Product 2.jpg" row="1" (tap)="openFoodModal('Product 2')" class="food-container-image"></Image>
-            <Label text="Product 2" row="1" textWrap="true" class="food-label"></Label>
-            <Image src="~/assets/img/product/Product 3.jpg" row="2" (tap)="openFoodModal('Product 3')" class="food-container-image"></Image>
-            <Label text="Product 3" row="2" textWrap="true" class="food-label"></Label>
-            <Image src="~/assets/img/product/Product 4.jpg" row="3" (tap)="openFoodModal('Product 4')" class="food-container-image"></Image>
-            <Label text="Product 4" row="3" textWrap="true" class="food-label"></Label>
-        </GridLayout> -->
-    </ScrollView>
+    <Label text="Order List" textWrap="true" class="h2 order-list-header"></Label>
+    <GridLayout columns="*,auto" rows="*,auto" width="100%" height="100%">
+        <ScrollView colSpan="2" class="order-list-container">
+            <StackLayout class="{{orderDataService.orderCart.orderData.length != 0 ? 'order-item-container' : 'order-list-empty-container'}}">
+                <GridLayout columns="*,40" rows="auto,auto" *ngFor="let order of orderDataService.orderCart.orderData; let i = index;">
+                    <Label col="0" row="0" text="{{order.productName}}" textWrap="true" class="order-item"></Label>
+                    <Label col="0" row="1" text="x {{order.piecesToOrder}} = Php{{order.totalPrice}}.00" textWrap="true"
+                        class="order-item"></Label>
+                    <!-- <Button text="&#xf044;" rowSpan="2" col="1" (tap)="modifyOrderData(i)" class="fa remove-modify-order"></Button> -->
+                    <Button text="&#xf2ed;" rowSpan="2" col="2" (tap)="removeOrderData(i)" class="fa remove-modify-order"></Button>
+                </GridLayout>
+                <Label rowSpan="3" text="&#xf07a;" *ngIf="orderDataService.orderCart.orderData.length == 0" class="fa order-list-empty order-list-empty-icon"
+                    textWrap="true"></Label>
+                <Label row="1" text="YOUR ORDER LIST IS EMPTY" *ngIf="orderDataService.orderCart.orderData.length == 0"
+                    class="h4 order-list-empty" textWrap="true"></Label>
+                <Button text="Add New Order" (tap)="openFoodMenuModal()" class="order-item-add-button"></Button>
+            </StackLayout>
+        </ScrollView>
+        <GridLayout row="1" colSpan="2" rows="auto,auto" columns="auto,*,125" class="total-amount-container" verticalAlign="bottom" *ngIf="orderDataService.orderCart.orderData.length > 0">
+            <Checkbox row="0" col="2" text="Send through SMS?" checked="true" (checkedChange)="sendThroughSMS($event)"></Checkbox>
+            <Label rowSpan="2" text="Total:" col="0" textWrap="true" class="h4 cart-food-detail-label-bold cart-total-amount-position cart-total-amount-label"></Label>
+            <Label rowSpan="2" text="Php{{orderDataService.orderCart.totalAmountPayable}}.00" col="1" textWrap="true" class="h3 cart-food-detail-label-bold cart-total-amount cart-total-amount-position"></Label>
+            <Button text="CHECK-OUT" (tap)="checkOut()" row="1" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button>
+        </GridLayout>
+        <!-- <Button text="Add Order" (tap)="openFoodMenuModal()" class="order-item-add-button"></Button> -->
+    </GridLayout>
 </StackLayout>

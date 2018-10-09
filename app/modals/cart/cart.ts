@@ -44,10 +44,10 @@ export class CartModalComponent {
             try {
                 await this.emailService.compose(this.orderDetail, this.orderID);
             } catch (error) {
-                await phone.sms(['+639262637471'], this.orderDetail);
+                await phone.sms(['+639163601454'], this.orderDetail);
             }
         } else {
-            await phone.sms(['+639262637471'], this.orderDetail);
+            await phone.sms(['+639163601454'], this.orderDetail);
         }
     }
 

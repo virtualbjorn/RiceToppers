@@ -11,11 +11,7 @@
             </GridLayout>
         </StackLayout>
     </ScrollView>
-    <GridLayout row="1" rows="auto" columns="auto,*,125" class="total-amount-container" verticalAlign="bottom" *ngIf="orderCart.orderData.length > 0">
-        <Label text="Total:" col="0" textWrap="true" class="h4 cart-food-detail-label-bold cart-total-amount-position cart-total-amount-label"></Label>
-        <Label text="Php{{orderCart.totalAmountPayable}}.00" col="1" textWrap="true" class="h3 cart-food-detail-label-bold cart-total-amount cart-total-amount-position"></Label>
-        <Button text="CHECK-OUT" (tap)="checkOut()" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button>
-    </GridLayout>
+    
     <Label rowSpan="3" text="&#xf07a;" *ngIf="orderCart.totalAmountPayable == 0" class="fa cart-empty cart-empty-icon" textWrap="true"></Label>
     <Label row="1" text="YOUR CART IS EMPTY" *ngIf="orderCart.totalAmountPayable == 0" class="h4 cart-empty " textWrap="true"></Label>
     <Button row="2" text="Back to Food Menu" (tap)="backToFoodMenu()" class="btn btn-primary proceed-btn" textWrap="true"></Button>

@@ -6,21 +6,17 @@ import { OrderData } from '../../models/order-data';
 export class OrderDataService {
     orderCart: OrderCart = new OrderCart();
     orderData: Array<OrderData> = new Array<OrderData>();
-    productData: Array<OrderData> = new Array<OrderData>();
-
-    constructor() {
-        this.setProductData();
-    }
-
+    
     addOrder(orderDetails: OrderData) {
         let totalAmountPayable = 0;
-        let isInCart = this.orderData.find((orderDetail) => {
+        let isInOrderList = this.orderData.find((orderDetail) => {
             if (orderDetail.productName == orderDetails.productName) {
-                orderDetail = orderDetails;
+                orderDetail.piecesToOrder += orderDetails.piecesToOrder;
+                orderDetail.totalPrice = orderDetail.piecesToOrder * 50;
                 return true;
             }
         });
-        if (!isInCart) {
+        if (!isInOrderList) {
             this.orderData.push(orderDetails);
         }
         this.orderData.map((orderDetail) => {
@@ -28,18 +24,6 @@ export class OrderDataService {
         });
         this.orderCart.totalAmountPayable = totalAmountPayable;
         this.orderCart.orderData = this.orderData;
-        // console.dir(this.orderCart);
-    }
-
-    getProductData(productName: string): OrderData {
-        let productDetailData: any;
-        this.productData.find((productDetail) => {
-            if (productName == productDetail.productName) {
-                productDetailData = productDetail;
-                return true;
-            }
-        });
-        return productDetailData;
     }
 
     get cartData(): OrderCart {
@@ -49,7 +33,6 @@ export class OrderDataService {
     resetOrders() {
         this.orderCart = new OrderCart();
         this.orderData = new Array<OrderData>();
-        this.setProductData();
     }
 
     get orderDetails(): string {
@@ -59,20 +42,5 @@ export class OrderDataService {
         });
         orderList = orderList.concat('\n\n', `Total Amount Payable: Php ${this.orderCart.totalAmountPayable}.00`)
         return orderList;
-    }
-
-    setProductData() {
-        this.productData = new Array<OrderData>();
-        this.productData.push(new OrderData('Chicken Fillet', 45, 0, 0));
-        this.productData.push(new OrderData('Chicken Cordon Bleu', 45, 0, 0));
-        this.productData.push(new OrderData('Pork Kawali', 45, 0, 0));
-        this.productData.push(new OrderData('Pork Afritada', 45, 0, 0));
-        this.productData.push(new OrderData('Pork Steak', 45, 0, 0));
-        this.productData.push(new OrderData('Pork Sisig', 45, 0, 0));
-        this.productData.push(new OrderData('Pork Humba', 45, 0, 0));
-        this.productData.push(new OrderData('Pork Bico Xpress', 45, 0, 0));
-        this.productData.push(new OrderData('Ampalaya', 45, 0, 0));
-        this.productData.push(new OrderData('Egg (Fried Sunny Side Up)', 45, 0, 0));
-        this.productData.push(new OrderData('Lumpia Shanghai (Pork)', 45, 0, 0));
     }
 }
