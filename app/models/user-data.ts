@@ -4,12 +4,4 @@ export class UserData {
     // contactNumbers: Array<string>;
     contactNumbers: string;
     deliveryAddress: string;
-
-    constructor() {
-        this.fullName = "";
-        this.idNumber = "";
-        // this.contactNumbers = [];
-        this.contactNumbers = "";
-        this.deliveryAddress = "";
-    }
 }

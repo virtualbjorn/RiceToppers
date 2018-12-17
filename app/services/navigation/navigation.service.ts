@@ -40,4 +40,24 @@ export class NavigationService {
       }
     });
   }
+
+  navigateToHomePage() {
+    this._routerExt.navigate(["/homePage"], {
+      clearHistory: true, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
+  
+  navigateToFoodOutletPage() {
+    this._routerExt.navigate(["/foodOutletPage"], {
+      clearHistory: true, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
 }

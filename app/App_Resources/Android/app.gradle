@@ -14,7 +14,9 @@ android {
     additionalParameters "--no-version-vectors"  
   }  
 } 
-
+project.ext {
+    googlePlayServicesVersion = "+"
+}
 def settingsGradlePath
 
 if(project.hasProperty("appResourcesPath")){

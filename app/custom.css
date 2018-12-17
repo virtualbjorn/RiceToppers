@@ -37,10 +37,10 @@ background-color: #fbfef9;
 }
 
 .switch[checked=true] {
-color: #ffffff;
+color: #f39237;
 }
 
-.switch[checked=true] {
+.switch {
 background-color: #191923;
 }
 

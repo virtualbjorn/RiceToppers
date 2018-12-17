@@ -1,14 +1,14 @@
-.food-menu-header {
-    margin: 15 0 10 0;
+.order-list-header {
+    margin: 15 0 5 0;
     font-weight: bold;
     horizontal-align: center;
 }
 
-.food-container-image {
+.order-container-image {
     margin: 0 5 5 5;
 }
 
-.food-label {
+.order-label {
     font-size: 30;
     color: #000000;
     background: rgba(255, 255, 255, 0.5);
@@ -19,4 +19,93 @@
     margin: 125 3 0 3;
     text-align: center;
     font-weight: bold;
+}
+
+.order-list-container {
+    height: 95%;
+    padding: 5 10 5 15;
+    border-width: 4;
+    border-color: #f39237;
+    border-radius: 5;
+    margin: 0 15;
+}
+
+.order-item-container {
+    padding: 15 15;
+    margin: 0 0 5;
+}
+
+.order-item {
+    color: #000000;
+    font-size: 15;
+}
+.order-item-add-button {
+    vertical-align: middle;
+    horizontal-align: center;
+    height: 45;
+    font-size: 20;
+    font-weight: bold;
+    margin: 20 0;
+    border-radius: 50%;
+    border-width: 1;
+    border-color: #092066;
+    background: #092066;
+    padding: 0 20 0;
+    color: #ffffff;
+}
+.order-list-empty-icon {
+    font-size: 80;
+    vertical-align: center;
+}
+
+.order-list-empty {
+    color: #888888;
+    horizontal-align: center;
+}
+
+.order-list-empty-container {
+    vertical-align: middle;
+}
+
+.remove-modify-order {
+    font-size: 20;
+    color: #4d4d4d;
+    border-width: 1;
+    border-color: transparent;
+    background: transparent;
+    padding: 4 4 8 4;
+}
+
+.total-amount-container {
+    border-top-width: 1;
+    border-top-color: #888888;
+    vertical-align: bottom;
+}
+
+.cart-food-detail-container {
+    margin: 5 0 5 10; 
+}
+
+.cart-food-detail-label-bold {
+    font-weight: bold;
+}
+
+.cart-total-amount {
+    margin-right: 2;
+}
+
+.cart-total-amount-label {
+    margin-left: 3;
+}
+
+.cart-total-amount-position {
+    vertical-align: center;
+    horizontal-align: right;
+}
+
+.cart-check-out {
+    font-size: 17;
+    padding-top: 5;
+    padding-bottom: 5;
+    margin: 0 0 0 0;
 }

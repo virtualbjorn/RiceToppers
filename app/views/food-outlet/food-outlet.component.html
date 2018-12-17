@@ -1,0 +1,21 @@
+<ActionBar title="Food Outlet" icon="" class="action-bar"></ActionBar>
+<GridLayout rows="*,auto" style="margin: 15 30 0 30;">
+    <GridLayout row="0" rows="auto,*">
+        <GridLayout row="0" columns="*,125">
+            <Label text="Food Name" class="food-menu-list-header" horizontalAlignment="left" col="0" textWrap="true"></Label>
+            <Label text="Food Availability" class="food-menu-list-header" col="1" textWrap="true"></Label>
+        </GridLayout>
+        <ScrollView row="1">
+            <StackLayout>
+                <GridLayout columns="*,125" *ngFor="let foodItem of foodMenuData">
+                    <Label text="{{foodItem.foodName}}" class="food-item" col="0" textWrap="true"></Label>
+                    <Switch [checked]="foodItem.isAvailable" class="switch" col="1" (tap)="toggleAvailability(foodItem, $event)"></Switch>
+                </GridLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+    <StackLayout row="1">
+        <Button text="Update Menu Availability" (tap)="updateFoodMenu()" class="btn btn-primary"></Button>
+        <!-- <Button text="Add New Menu" (tap)="updateFoodMenu()" class="btn btn-primary"></Button> -->
+    </StackLayout>
+</GridLayout>

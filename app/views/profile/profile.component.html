@@ -7,7 +7,7 @@
     <Label text="Contact Number/s:" textWrap="true" class="h5"></Label>
     <TextField hint="Contact Number" [(ngModel)]="userData.contactNumbers" keyboardType="number" required></TextField>
     <Label text="Delivery Address:" textWrap="true" class="h5"></Label>
-    <TextView hint="Delivery Address" [(ngModel)]="userData.deliveryAddress" height="125" editable="true" required></TextView>
+    <TextView hint="Delivery Address e.g.. Bldg 42-6/F PAT Bldg" [(ngModel)]="userData.deliveryAddress" height="125" editable="true" required></TextView>
     <Button text="Save" (tap)="saveUserData()" class="btn btn-primary proceed-btn"></Button>
     <Button text="Proceed to Order" (tap)="proceedToOrderPage()" class="btn btn-primary proceed-btn"></Button>    
 </StackLayout>
