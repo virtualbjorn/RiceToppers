@@ -5,8 +5,8 @@ import { OrderData } from '../../models/order-data';
 import { OrderDataService } from '../../services/order-data/order-data.service';
 import { FoodMenuData } from '~/models/food-menu-data';
 import { FoodMenuService } from '~/services/food-menu-data/food-menu-data.service';
-import { Switch } from 'tns-core-modules/ui/switch/switch';
 import { StackLayout } from 'ui/layouts/stack-layout';
+import * as firebase from 'nativescript-plugin-firebase';
 
 @Component({
     moduleId: module.id,
@@ -19,6 +19,7 @@ export class AddOrderModalComponent implements OnInit {
     stackLayout: StackLayout;
 
     foodMenuList: FoodMenuData[];
+    foodMenuArray: any;
     orderData: OrderData = new OrderData();
     selectedFoodItem: number = 0;
     // isCombo: boolean;
@@ -32,6 +33,10 @@ export class AddOrderModalComponent implements OnInit {
         private foodMenuService: FoodMenuService
     ) {
         this.foodMenuList = foodMenuService.foodMenuList;
+        ngZone.run(async () => {
+            await foodMenuService.setFoodMenuData();
+            this.foodMenuList = foodMenuService.foodMenuList;
+        });
         this.orderData = params.context;
         page.on('unloaded', () => {
             this.params.closeCallback();
@@ -60,7 +65,7 @@ export class AddOrderModalComponent implements OnInit {
     //     this.isRiceAdded = riceCheckEvent.value;
     // }
 
-    updateOrderData(checkedFoodItem, foodItem: FoodMenuData) {
+    updateOrderData(checkedFoodItem: any, foodItem: FoodMenuData) {
         if (checkedFoodItem.value) {
             ++this.selectedFoodItem;
             foodItem.isSelected = true;

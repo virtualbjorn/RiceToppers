@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FoodMenuData } from '~/models/food-menu-data';
 import * as firebase from 'nativescript-plugin-firebase';
 import { Switch } from 'tns-core-modules/ui/switch/switch';
+import { EventData } from 'tns-core-modules/ui/page/page';
 
 @Component({
     selector: "foodOutletPage",
@@ -20,31 +21,27 @@ export class FoodOutletComponent {
         });
         firebase.getValue('/food-menu')
             .then(result => {
-                let foodMenu = JSON.stringify(result);
-                console.dir(foodMenu);
-                // this.foodMenuArray = JSON.parse(JSON.stringify(foodMenuParse.value));
-                // for (let foodItem in this.foodMenuArray) {
-                //     this.foodMenuData.push(new FoodMenuData(foodItem, this.foodMenuArray[foodItem].foodPriceCombo, this.foodMenuArray[foodItem].foodPriceSingle, true, this.foodMenuArray[foodItem].isAvailable));
-                // }
-                // console.dir(this.foodMenuData);
+                let foodMenu = JSON.parse(JSON.stringify(result));
+                this.foodMenuArray = foodMenu.value;
+                this.foodMenuArray.forEach((foodItem: FoodMenuData) => {
+                    this.foodMenuData.push(new FoodMenuData(foodItem.foodName, foodItem.foodPriceCombo, foodItem.foodPriceSingle, true, foodItem.isAvailable));
+                });
             })
             .catch(error => console.log("Error: " + error));
     }
 
-    toggleAvailability(foodItem, args) {
+    toggleAvailability(foodItemIndex: number, args: EventData) {
         let switchObject = <Switch>args.object;
-        let currentFoodItem = JSON.parse(JSON.stringify(foodItem));
-        currentFoodItem.isAvailable = !switchObject.checked;
-        this.updateFoodMenu(currentFoodItem);
+        console.log(switchObject.checked);
+        this.foodMenuArray[foodItemIndex].isAvailable = switchObject.checked;
+        this.updateFoodMenu(foodItemIndex);
     }
 
-    updateFoodMenu(foodItem: any) {
-        let updateString = JSON.stringify(`{'${foodItem.foodName}': { 'isAvailable': ${foodItem.isAvailable}, 'foodPriceCombo': 10, 'foodPriceSingle': 15 }}`);
-        console.dir(updateString);
+    updateFoodMenu(foodItemIndex: number) {
         firebase.update(
-            `/foodmenu/${foodItem.foodName}`,
+            `/food-menu/${foodItemIndex}`,
             {
-                "isAvailable": foodItem.foodName
+                "isAvailable": this.foodMenuArray[foodItemIndex].isAvailable
             }
         );
     }

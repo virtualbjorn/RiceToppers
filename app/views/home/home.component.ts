@@ -6,6 +6,7 @@ import * as dialogs from 'ui/dialogs';
 import { localStorage } from '~/main';
 import { Seller } from '~/models/seller-data';
 import * as firebase from "nativescript-plugin-firebase";
+import { FoodMenuService } from '~/services/food-menu-data/food-menu-data.service';
 
 @Component({
     selector: "homePage",
@@ -19,8 +20,10 @@ export class HomeComponent {
 
     constructor(
         private navigationService: NavigationService,
-        private userDataService: UserDataService
+        private userDataService: UserDataService,
+        private foodMenuService: FoodMenuService
     ) {
+        foodMenuService.setFoodMenuData();
         if (userDataService.isUserData) {
             this.userData = userDataService.user;
         }
@@ -62,6 +65,7 @@ export class HomeComponent {
 
     proceedToOrderPage() {
         if (this.isUserValidated()) {
+            this.foodMenuService.setFoodMenuData();
             this.navigationService.navigateToOrderPage();
         }
     }
@@ -92,7 +96,7 @@ export class HomeComponent {
                     // JSON.stringify(result);
                     // console.dir(result);
                     let isAuthenticated = dialogs.alert({ message: 'Authentication Successful', okButtonText: 'OK' });
-                    if(isAuthenticated) {
+                    if (isAuthenticated) {
                         this.navigationService.navigateToFoodOutletPage();
                     }
                 })

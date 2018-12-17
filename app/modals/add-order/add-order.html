@@ -10,7 +10,7 @@
             <!-- <ScrollView row="0" style="border-bottom-width: 2; border-bottom-color: #f39237;"> -->
             <StackLayout class="food-list-container-1">
                 <Checkbox text="{{foodItem.foodName}}" checked="false" class="food-item" (checkedChange)="updateOrderData($event, foodItem)"
-                    isEnabled="{{selectedFoodItem < 2 || foodItem.isSelected}}" *ngFor="let foodItem of foodMenuList"></Checkbox>
+                    isEnabled="{{(selectedFoodItem < 2 || foodItem.isSelected) && foodItem.isAvailable}}" *ngFor="let foodItem of foodMenuList"></Checkbox>
             </StackLayout>
         </ScrollView>
         <GridLayout row="1" columns="*,*" #stackContainer class="border-top-list food-list-container-1 hidden">
