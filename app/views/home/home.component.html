@@ -1,19 +1,21 @@
 <ActionBar title="Home" icon="" class="action-bar"></ActionBar>
 <TabView id="tabViewContainer" androidTabsPosition="bottom">
     <StackLayout *tabItem="{title: 'Customer Tab', iconSource: 'res://cart'}">
-        <StackLayout style="margin: 15 20 0 20;">
-            <Label text="Full Name:" textWrap="true" class="h5"></Label>
-            <TextField hint="Name" [(ngModel)]="userData.fullName" required></TextField>
-            <Label text="ID Number:" textWrap="true" class="h5"></Label>
-            <TextField hint="ID Number" [(ngModel)]="userData.idNumber" keyboardType="number" required></TextField>
-            <Label text="Contact Number/s:" textWrap="true" class="h5"></Label>
-            <TextField hint="Contact Number" [(ngModel)]="userData.contactNumbers" keyboardType="number" required></TextField>
-            <Label text="Delivery Address:" textWrap="true" class="h5"></Label>
-            <TextView hint="Delivery Address e.g.. Bldg 42-6/F PAT Bldg" [(ngModel)]="userData.deliveryAddress" height="125"
-                editable="true" required></TextView>
-            <Button text="Save" (tap)="saveUserData()" class="btn btn-primary proceed-btn"></Button>
-            <Button text="Proceed to Order" (tap)="proceedToOrderPage()" class="btn btn-primary proceed-btn"></Button>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout style="margin: 15 20 0 20;">
+                <Label text="Full Name:" textWrap="true" class="h5"></Label>
+                <TextField hint="Name" [(ngModel)]="userData.fullName" required></TextField>
+                <Label text="ID Number:" textWrap="true" class="h5"></Label>
+                <TextField hint="ID Number" [(ngModel)]="userData.idNumber" keyboardType="number" required></TextField>
+                <Label text="Contact Number/s:" textWrap="true" class="h5"></Label>
+                <TextField hint="Contact Number" [(ngModel)]="userData.contactNumbers" keyboardType="number" required></TextField>
+                <Label text="Delivery Address:" textWrap="true" class="h5"></Label>
+                <TextView hint="Delivery Address e.g.. Bldg 42-6/F PAT Bldg" [(ngModel)]="userData.deliveryAddress"
+                    height="125" editable="true" required></TextView>
+                <Button text="Save" (tap)="saveUserData()" class="btn btn-primary proceed-btn"></Button>
+                <Button text="Proceed to Order" (tap)="proceedToOrderPage()" class="btn btn-primary proceed-btn"></Button>
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
     <StackLayout *tabItem="{title: 'Seller Tab', iconSource: 'res://shop'}">
         <GridLayout rows="*">

@@ -8,8 +8,8 @@
         <ScrollView row="1">
             <StackLayout>
                 <GridLayout columns="*,125" *ngFor="let foodItem of foodMenuArray; let i = index;">
-                    <Label text="{{foodItem.foodName}}" class="food-item" col="0" textWrap="true"></Label>
-                    <Switch [checked]="foodItem.isAvailable" class="switch" col="1" (checkedChange)="toggleAvailability(i, $event)"></Switch>
+                    <Label text="{{foodItem.fN}}" class="food-item" col="0" textWrap="true"></Label>
+                    <Switch [checked]="foodItem.iA" class="switch" col="1" (checkedChange)="toggleAvailability(i, $event)"></Switch>
                 </GridLayout>
             </StackLayout>
         </ScrollView>

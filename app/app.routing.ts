@@ -7,9 +7,11 @@ import { OrderComponent } from "./views/order/order.component";
 import { OrderReviewComponent } from "./views/order-review/order-review.component";
 import { HomeComponent } from "./views/home/home.component";
 import { FoodOutletComponent } from "./views/food-outlet/food-outlet.component";
+import { DashboardComponent } from "./views/dashboard/dashboard.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/homePage", pathMatch: "full" },
+    { path: "", redirectTo: "/dashboard", pathMatch: "full" },
+    { path: "dashboard", component: DashboardComponent },
     { path: "homePage", component: HomeComponent },
     { path: "foodOutletPage", component: FoodOutletComponent },
     { path: "profilePage", component: ProfileComponent },
@@ -18,6 +20,7 @@ const routes: Routes = [
 ];
 
 export const NavigatableComponents = [
+    DashboardComponent,
     HomeComponent,
     FoodOutletComponent,
     ProfileComponent,

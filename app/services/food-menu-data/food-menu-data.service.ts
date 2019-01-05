@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FoodMenuData } from '~/models/food-menu-data';
 import * as firebase from 'nativescript-plugin-firebase';
+import * as dialogs from 'ui/dialogs';
 
 @Injectable()
 export class FoodMenuService {
@@ -23,13 +24,25 @@ export class FoodMenuService {
     }
 
     public async setFoodMenuData(): Promise<any> {
-        let result = await firebase.getValue('/food-menu');
-        let foodMenu = JSON.parse(JSON.stringify(result));
-        this.foodMenuArray = foodMenu.value;
-        this.foodMenuData = new Array<FoodMenuData>();
-        this.foodMenuArray.forEach((foodItem: FoodMenuData) => {
-            this.foodMenuData.push(new FoodMenuData(foodItem.foodName, foodItem.foodPriceCombo, foodItem.foodPriceSingle, false, foodItem.isAvailable));
-        });
+        let result = await firebase.firestore.collection('food-outlet').doc('3xS7rLZkunAYrp1JA7jB').get();
+        if (result.exists) {
+            this.foodMenuArray = JSON.parse(JSON.stringify(result.data()));
+            this.foodMenuData = new Array<FoodMenuData>();
+            this.foodMenuArray['combo-ni-ante'].forEach((foodItem: any) => {
+                this.foodMenuData.push(new FoodMenuData(foodItem.fN, foodItem.fPC, foodItem.fPS, false, foodItem.iA));
+            });
+        } else {
+            if (await dialogs.confirm({ message: 'Unable to parse data from remote server! Please try again.', okButtonText: 'OK' })) {
+                this.setFoodMenuData();
+            }
+        }
+        // let result = await firebase.getValue('/food-menu');
+        // let foodMenu = JSON.parse(JSON.stringify(result));
+        // this.foodMenuArray = foodMenu.value;
+        // this.foodMenuData = new Array<FoodMenuData>();
+        // this.foodMenuArray.forEach((foodItem: FoodMenuData) => {
+        //     this.foodMenuData.push(new FoodMenuData(foodItem.foodName, foodItem.foodPriceCombo, foodItem.foodPriceSingle, false, foodItem.isAvailable));
+        // });
     }
 
     // private setFoodMenuData() {
