@@ -1,31 +1,26 @@
-<ActionBar title="Home" icon="" class="action-bar"></ActionBar>
-<TabView id="tabViewContainer" androidTabsPosition="bottom">
-    <StackLayout *tabItem="{title: 'Customer Tab', iconSource: 'res://cart'}">
+<GridLayout rows="auto, *, auto" columns="10*, 2*">
+    <Label #foodMenuLabel row="0" col="0" text="Combo Ni Ante's Food Menu" textWrap="true" class="food-menu-label"></Label>
+    <Button row="0" col="1" text="&#xf2f1;" (tap)="onSyncFoodMenu()" [class]="isFoodMenuLoading ? 'fa icon-button sync-progress-icon-button' : 'fa icon-button sync-icon-button'"></Button>
+    <StackLayout row="1" colSpan="2" class="content-container" height="80%">
         <ScrollView>
-            <StackLayout style="margin: 15 20 0 20;">
-                <Label text="Full Name:" textWrap="true" class="h5"></Label>
-                <TextField hint="Name" [(ngModel)]="userData.fullName" required></TextField>
-                <Label text="ID Number:" textWrap="true" class="h5"></Label>
-                <TextField hint="ID Number" [(ngModel)]="userData.idNumber" keyboardType="number" required></TextField>
-                <Label text="Contact Number/s:" textWrap="true" class="h5"></Label>
-                <TextField hint="Contact Number" [(ngModel)]="userData.contactNumbers" keyboardType="number" required></TextField>
-                <Label text="Delivery Address:" textWrap="true" class="h5"></Label>
-                <TextView hint="Delivery Address e.g.. Bldg 42-6/F PAT Bldg" [(ngModel)]="userData.deliveryAddress"
-                    height="125" editable="true" required></TextView>
-                <Button text="Save" (tap)="saveUserData()" class="btn btn-primary proceed-btn"></Button>
-                <Button text="Proceed to Order" (tap)="proceedToOrderPage()" class="btn btn-primary proceed-btn"></Button>
+            <StackLayout>
+                <GridLayout #foodItemGridLayout rows="100%" columns="4*, 9*" *ngFor="let foodItem of _foodMenuDataService.foodMenuList;">
+                    <Image col="0" class="food-image" stretch="aspectFill" src="~/assets/img/photos/chicken_cordon_bleu.jpg"></Image>
+                    <StackLayout col="1" class="food-detail-container">
+                        <Label text="{{foodItem.foodName}}" textWrap="true" class="food-name"></Label>
+                        <Label text="{{foodItem.foodDescription}}" textWrap="true" class="food-description"></Label>
+                    </StackLayout>
+                    <GridLayout *ngIf="!foodItem.isAvailable" row="0" colSpan="2" rows="*" columns="*" height="100%" class="food-item-not-available">
+                        <FlexboxLayout horizontalAlignment="center">
+                            <Label text="Not Available" row="0" col="0" textWrap="true" alignSelf="center" class="not-available-label"></Label>
+                        </FlexboxLayout>
+                    </GridLayout>
+                </GridLayout>
             </StackLayout>
         </ScrollView>
     </StackLayout>
-    <StackLayout *tabItem="{title: 'Seller Tab', iconSource: 'res://shop'}">
-        <GridLayout rows="*">
-            <FlexboxLayout row="0" flexDirection="column" alignContent="center" style="margin: 15 20 0 20;">
-                <Label text="Seller Email:" textWrap="true" class="h5"></Label>
-                <TextField hint="Seller Email" [(ngModel)]="sellerData.sellerEmail" keyboard="email" required></TextField>
-                <Label text="Seller Password:" textWrap="true" class="h5"></Label>
-                <TextField hint="Seller Password" [(ngModel)]="sellerData.sellerPassword" required></TextField>
-                <Button text="Login" (tap)="sellerLogin()" class="btn btn-primary proceed-btn"></Button>
-            </FlexboxLayout>
-        </GridLayout>
+    <StackLayout row="1" colSpan="2" class="activity-indicator-wrapper" *ngIf="isFoodMenuLoading">
+        <ActivityIndicator width="100" height="100" [busy]="isFoodMenuLoading" class="activity-indicator"></ActivityIndicator>
     </StackLayout>
-</TabView>
+    <Button row="2" colSpan="2" text="Order Now" (tap)="onOrderNow()" class="button" textWrap="true"></Button>
+</GridLayout>

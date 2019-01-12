@@ -8,15 +8,18 @@ import { OrderReviewComponent } from "./views/order-review/order-review.componen
 import { HomeComponent } from "./views/home/home.component";
 import { FoodOutletComponent } from "./views/food-outlet/food-outlet.component";
 import { DashboardComponent } from "./views/dashboard/dashboard.component";
+import { AccountComponent } from "./views/account-and-signup/account.component";
+import { SignupComponent } from "./views/account-and-signup/signup.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/dashboard", pathMatch: "full" },
+    { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "dashboard", component: DashboardComponent },
-    { path: "homePage", component: HomeComponent },
+    { path: "home", component: HomeComponent },
     { path: "foodOutletPage", component: FoodOutletComponent },
     { path: "profilePage", component: ProfileComponent },
     { path: "orderPage", component: OrderComponent },
-    { path: "profile", component: OrderReviewComponent },
+    { path: "account", component: AccountComponent },
+    { path: "signup", component: SignupComponent },
 ];
 
 export const NavigatableComponents = [
@@ -25,7 +28,9 @@ export const NavigatableComponents = [
     FoodOutletComponent,
     ProfileComponent,
     OrderComponent,
-    OrderReviewComponent
+    OrderReviewComponent,
+    AccountComponent,
+    SignupComponent,
 ]
 
 @NgModule({

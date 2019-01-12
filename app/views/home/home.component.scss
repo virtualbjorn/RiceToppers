@@ -1,19 +1,106 @@
+// .ng-valid[required] {
+//     padding: 3 0 3 3;
+//     border-color: #ff9900;
+//     border-width: 2;
+//     border-left-width: 2;
+//     border-radius: 5;
+//     color: #000000;
+// }
 
-.ng-valid[required] {
-    padding: 3 0 3 3;
-    border-color: #ff9900;
-    border-width: 2;
-    border-left-width: 2;
-    border-radius: 5;
-    color: #000000;
+// .ng-pristine.ng-invalid,
+// .ng-dirty.ng-invalid {
+//     color: #ff9900;
+//     padding: 3 0 3 3;
+//     border-width: 2;
+//     border-color: #f39237;
+//     border-left-width: 5;
+//     border-radius: 5;
+// }
+
+/* New Home */
+StackLayout > GridLayout {
+  padding: 5 5;
 }
-
-.ng-pristine.ng-invalid,
-.ng-dirty.ng-invalid {
-    color: #ff9900;
-    padding: 3 0 3 3;
-    border-width: 2;
-    border-color: #f39237;
-    border-left-width: 5;
-    border-radius: 5;
+StackLayout > GridLayout + GridLayout {
+  border-top-width: 2;
+  border-top-color: #707070;
+}
+.food-image {
+  border-radius: 10;
+  height: 100%;
+  width: 100%;
+}
+.food-detail-container {
+  padding-left: 10;
+}
+.food-name,
+.not-available-label {
+  font-weight: bold;
+  color: #000000;
+}
+.food-name {
+  font-size: 18px;
+}
+.food-description {
+  font-size: 10;
+  color: #707070;
+}
+.icon-button {
+  color: #ffffff;
+  font-size: 24;
+}
+.food-menu-label,
+.icon-button {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 24;
+  vertical-align: middle;
+  width: 100%;
+}
+.button {
+  background: #707070;
+}
+.content-container,
+.activity-indicator-wrapper {
+  margin: 20 0;
+}
+.activity-indicator-wrapper {
+  background: rgba(0, 0, 0, 0.3);
+  border-width: 2;
+  border-color: transparent;
+  border-radius: 5;
+}
+.trial-color-with-opacity {
+  color: rgba(0, 0, 0, 0.3);
+}
+.food-item-not-available {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10;
+}
+.not-available-label {
+  rotate: -5deg;
+  color: #ffffff;
+  font-size: 24;
+  vertical-align: middle;
+  text-align: center;
+}
+$rotateIcon: 36deg;
+@keyframes rotateIcon {
+  0% { rotate: 0; }
+  10% { rotate: $rotateIcon; }
+  20% { rotate: $rotateIcon * 2; }
+  30% { rotate: $rotateIcon * 3; }
+  40% { rotate: $rotateIcon * 4; }
+  50% { rotate: $rotateIcon * 5; }
+  60% { rotate: $rotateIcon * 6; }
+  70% { rotate: $rotateIcon * 7; }
+  80% { rotate: $rotateIcon * 8; }
+  90% { rotate: $rotateIcon * 9; }
+  100% { rotate: 360deg; }
+}
+.sync-progress-icon-button {
+  animation-name: rotateIcon;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-duration: 500ms;
 }

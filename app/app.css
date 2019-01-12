@@ -9,25 +9,189 @@ In many cases you may want to use the NativeScript core theme instead
 of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
-@import '~nativescript-theme-core/css/core.light.css';
-@import './custom.css';
+
+@import "~nativescript-theme-core/css/core.light.css";
+@import "./custom.css";
 /* @import './main.scss'; */
+
 .fa {
-    font-family: "FontAwesome-Solid";
+  font-family: "FontAwesome-Solid";
 }
+
+.label-text {
+  font-family: "Lato-Regular";
+}
+
 .actionbar-action-items {
-    padding-right: 0;
-    padding-left: 0;
-    margin: 0 0 0 0;
-    border-color: transparent;
-    background-color: transparent;
-    border-width: 1;
-    width: 45;
-    font-size: 25;
-    color: #ffffff;
+  padding-right: 0;
+  padding-left: 0;
+  margin: 0 0 0 0;
+  border-color: transparent;
+  background-color: transparent;
+  border-width: 1;
+  width: 45;
+  font-size: 25;
+  color: #ffffff;
 }
 
 .proceed-btn {
-    font-weight: bold;
-    font-size: 18;
+  font-weight: bold;
+  font-size: 18;
+}
+
+button {
+  font-size: 15;
+  horizontal-align: center;
+}
+
+RadSideDrawer>StackLayout {
+  font-family: "Lato-Regular";
+  color: #ffffff;
+}
+
+.sideStackLayout {
+  background-color: #707070;
+}
+
+.sideTitleStackLayout {
+  height: 56;
+  text-align: center;
+  vertical-align: center;
+}
+
+.main-content-wrapper, .main-app-background {
+  background: #ff9900;
+}
+
+.main-app-background {
+  vertical-align: middle;
+}
+
+.content-container {
+  background: #ffffff;
+  border-width: 2;
+  border-color: #707070;
+  border-radius: 5;
+  margin: 10 10;
+}
+
+.content-container--home {
+  margin-top: 15;
+  padding: 0 15;
+}
+
+.sidedrawer-title-image {
+  margin: 17 70 15;
+}
+
+.sidedrawer-user-greeting {
+  font-size: 31;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0 0 10 10;
+}
+
+.sidedrawer-hamburger-button, .sidedrawer-button, .sidedrawer-button-icon {
+  color: #ffffff;
+  font-size: 25;
+  border-width: 1;
+  border-color: transparent;
+  background: transparent;
+}
+
+.sidedrawer-button-icon {
+  padding: 0;
+  margin: 0 15 0 10;
+  width: 35;
+}
+
+.sidedrawer-button {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.logo-black-big {
+  width: 70%;
+  horizontal-align: center;
+}
+
+.button {
+  vertical-align: middle;
+  horizontal-align: center;
+  height: 45;
+  font-size: 20;
+  font-weight: bold;
+  margin: 20 0;
+  border-radius: 50%;
+  border-width: 1;
+  border-color: transparent;
+  background: #092066;
+  padding: 0 20 0;
+  color: #ffffff;
+}
+
+.textfield-login {
+  margin-top: 25;
+  padding: 0;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Lato-Regular";
+  font-size: 22;
+  border-radius: 15;
+  border-color: #000000;
+  border-width: 1;
+  height: 45;
+  width: 80%;
+  background: #ffffff;
+}
+
+.label-login {
+  font-size: 25;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  margin-top: 25;
+  width: 80%;
+}
+
+.ng-invalid {
+  font-weight: normal;
+}
+
+.button-login {
+  height: 50;
+  font-size: 25;
+}
+
+.guest-mode-button {
+  margin-top: 5;
+  background: #FF0000;
+}
+
+.gridlayout-login {
+  width: 80%;
+}
+
+.activity-indicator-wrapper {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  vertical-align: middle;
+}
+
+.activity-indicator {
+  color: #ffffff;
+  width: 30%;
+  height: 30%;
+}
+
+.icon-button {
+  background: transparent;
+  border-color: transparent;
+  border-width: 1;
+  font-size: 26;
+}
+
+TextField:highlighted {
+  color: #ff9900;
 }

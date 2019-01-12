@@ -1,8 +1,63 @@
-<page-router-outlet></page-router-outlet>
-<!-- <RadSideDrawer>
-    <GridLayout tkDrawerContent>
-        <Label text="Side Menu"></Label>
+<!-- <page-router-outlet *ngIf="isGuestMode"></page-router-outlet> -->
+<RadSideDrawer tkExampleTitle tkToggleNavButton (drawerClosing)="onDrawerClosed()">
+    <StackLayout tkDrawerContent class="sideStackLayout">
+        <Image src="~/assets/img/logos/RiceToppers_Logo_White.png" class="sidedrawer-title-image"></Image>
+        <Label text="Hi, {{currentUserName}}" textWrap="true" class="sidedrawer-user-greeting"></Label>
+        <ScrollView>
+            <StackLayout *ngIf="isLoggedIn">
+                <GridLayout columns="auto, *">
+                    <Button text="&#xf015;" col="0" class="fa sidedrawer-button-icon"></Button>
+                    <Label text="Home" col="1" textWrap="true" class="sidedrawer-button"></Label>
+                </GridLayout>
+                <GridLayout columns="auto, *" (tap)="onAccountSettings()">
+                    <Button text="&#xf4fe;" col="0" class="fa sidedrawer-button-icon"></Button>
+                    <Label text="Account Settings" col="1" textWrap="true" class="sidedrawer-button"></Label>
+                </GridLayout>
+                <GridLayout columns="auto, *">
+                    <Button text="&#xf022;" col="0" class="fa sidedrawer-button-icon"></Button>
+                    <Label text="Order History" col="1" textWrap="true" class="sidedrawer-button"></Label>
+                </GridLayout>
+                <GridLayout columns="auto, *" (tap)="onSignout()">
+                    <Button text="&#xf2f5;" col="0" class="fa sidedrawer-button-icon"></Button>
+                    <Label text="Sign-out" col="1" textWrap="true" class="sidedrawer-button"></Label>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout *ngIf="!isLoggedIn">
+                <GridLayout columns="auto, *">
+                    <Button text="&#xf234;" col="0" class="fa sidedrawer-button-icon"></Button>
+                    <Label text="Sign-up" col="1" textWrap="true" class="sidedrawer-button"></Label>
+                </GridLayout>
+                <GridLayout columns="auto, *" (tap)="onSignIn()">
+                    <Button text="&#xf2f6;" col="0" class="fa sidedrawer-button-icon"></Button>
+                    <Label text="Sign-in" col="1" textWrap="true" class="sidedrawer-button"></Label>
+                </GridLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+    <GridLayout rows="auto, *" *ngIf="isLoggedIn" tkMainContent class="main-content-wrapper">
+        <GridLayout row="0" rows="auto" columns="*, 223, *">
+            <Button text="&#xf0c9;" (tap)="openDrawer()" col="0" class="fa sidedrawer-hamburger-button"></Button>
+            <Image src="~/assets/img/logos/RiceToppers_Logo_Black.png" col="1"></Image>
+        </GridLayout>
+        <StackLayout row="1" [class]="isOnHomePage ? 'content-container--home' : 'content-container'">
+            <router-outlet></router-outlet>
+        </StackLayout>
     </GridLayout>
-
-    <page-router-outlet tkMainContent></page-router-outlet>
-</RadSideDrawer> -->
+    <GridLayout rows="*, auto, *" *ngIf="!isLoggedIn" tkMainContent class="main-content-wrapper">
+        <StackLayout row="1">
+            <Image src="~/assets/img/logos/RiceToppers_Logo_Black.png" class="logo-black-big"></Image>
+            <Label text="Healthy and Affordable Meals at your fingertips" textWrap="true" class="label-login"></Label>
+            <TextField class="textfield-login" hint="Email Address" text="" keyboardType="email" required></TextField>
+            <TextField class="textfield-login" hint="Password" text="" secure="true" required></TextField>
+            <GridLayout class="gridlayout-login" rows="auto, auto" columns="*, *">
+                <Button row="0" col="0" text="Sign-up" textWrap="true" class="button button-login"></Button>
+                <Button row="0" col="1" text="Login" textWrap="true" class="button button-login"></Button>
+                <Button row="1" colSpan="2" text="Guest Mode" textWrap="true" class="button guest-mode-button button-login"
+                    (tap)="onGuestMode()"></Button>
+            </GridLayout>
+        </StackLayout>
+        <StackLayout *ngIf="isLoading" row="0" rowSpan="3" class="activity-indicator-wrapper">
+            <ActivityIndicator #activityIndicator [busy]="isLoading" class="activity-indicator"></ActivityIndicator>
+        </StackLayout>
+    </GridLayout>
+</RadSideDrawer>

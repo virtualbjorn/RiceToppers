@@ -60,4 +60,34 @@ export class NavigationService {
       }
     });
   }
+
+  navigateToAccountPage() {
+    this._routerExt.navigate(["/account"], {
+      clearHistory: true, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
+
+  navigateToSignupPage() {
+    this._routerExt.navigate(["/signup"], {
+      clearHistory: false, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
+  
+  navigateToLoginPage() {
+    this._routerExt.navigate(["/login"], {
+      clearHistory: true, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
 }

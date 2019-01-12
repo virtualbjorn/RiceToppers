@@ -16,6 +16,7 @@ import { FoodMenuService } from "~/services/food-menu-data/food-menu-data.servic
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular';
 
 @NgModule({
     bootstrap: [
@@ -25,7 +26,8 @@ import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
         NativeScriptModule,
         NativeScriptFormsModule,
         AppRoutingModule,
-        TNSCheckBoxModule
+        TNSCheckBoxModule,
+        NativeScriptUISideDrawerModule
     ],
     declarations: [
         AppComponent,

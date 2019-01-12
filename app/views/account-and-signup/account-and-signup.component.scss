@@ -1,0 +1,92 @@
+$updateImageSize: 80;
+$imageSizeContainer: 176;
+.account-signup-wrapper {
+  margin: 10 8 0 8;
+  padding: 0 8;
+  // width: 100%;
+}
+.account-signup-header-label {
+  margin-top: 5;
+  font-size: 30;
+  horizontal-align: center;
+  color: #000000;
+  font-weight: bold;
+}
+.account-signup-image {
+  horizontal-align: center;
+  width: 160;
+  height: 160;
+  border-radius: 160 * 2;
+}
+.account-signup-image-wrapper {
+  horizontal-align: center;
+  width: $imageSizeContainer;
+  height: $imageSizeContainer;
+  border-width: 8;
+  border-radius: $imageSizeContainer * 2;
+  border-color: #ff9900;
+  margin-bottom: 20;
+  .account-signup-image-update {
+    margin-top: $updateImageSize;
+    background: rgba(0, 0, 0, 0.18);
+    display: inline-block;
+    width: $updateImageSize * 2;
+    height: $updateImageSize;
+    border-bottom-left-radius: $updateImageSize * 2;
+    border-bottom-right-radius: $updateImageSize * 2;
+    text-align: center;
+    padding-top: 15;
+    label {
+      color: #ffffff;
+      font-size: 20;
+      font-weight: bold;
+    }
+    .label-update {
+      font-size: 20;
+    }
+  }
+}
+StackLayout > .textfield-label {
+  margin-top: 3;
+}
+.textfield-label {
+  font-weight: bold;
+  font-size: 22;
+  color: #000000;
+  vertical-align: middle;
+}
+TextField {
+  padding: 0 0 3 7;
+  font-family: "Lato-Regular";
+  font-weight: bold;
+  height: 40;
+  font-size: 21;
+  border-width: 1;
+  border-color: #ff9900;
+  border-radius: 8;
+  vertical-align: middle;
+}
+.ng-invalid {
+  font-weight: normal;
+}
+.textfield-edit-button {
+  border-width: 1;
+  border-color: transparent;
+  color: #ff9900;
+  width: 30;
+  padding: 0;
+}
+.update-button {
+  vertical-align: middle;
+  horizontal-align: center;
+  height: 45;
+  font-size: 20;
+  font-weight: bold;
+  margin: 20 0;
+  border-radius: 50%;
+  border-width: 1;
+  border-color: #092066;
+  background: #092066;
+  padding: 0 20 0;
+  color: #ffffff;
+}

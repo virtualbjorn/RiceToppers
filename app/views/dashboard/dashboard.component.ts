@@ -9,6 +9,6 @@ import { Page } from "tns-core-modules/ui/page/page";
 })
 export class DashboardComponent {
     constructor(private _page: Page) {
-        _page.actionBarHidden = true;
+        // _page.actionBarHidden = true;
     }
 }
