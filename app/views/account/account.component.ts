@@ -9,12 +9,14 @@ import { TextField } from 'ui/text-field';
 @Component({
     selector: "app-account",
     moduleId: module.id,
-    templateUrl: "./account-and-signup.component.html",
-    styleUrls: ["./account-and-signup.component.scss"]
+    templateUrl: "./account.component.html",
+    styleUrls: ["../account-and-signup.scss"]
 })
 export class AccountComponent {
     userData: UserData = new UserData();
     isLoggedIn: boolean = true;
+    isEditableTextField: boolean = false;
+    editButton: string = String.fromCharCode(0xf304);;
 
     constructor(
         private navigationService: NavigationService,
@@ -23,11 +25,12 @@ export class AccountComponent {
         if (userDataService.isUserData) {
             this.userData = userDataService.user;
         }
-        this.userData.accountType = this.isLoggedIn ? "Customer" : "Food Provider";
-        this.userData.emailAddress = "virtual.bjorn@gmail.com";
-        this.userData.fullName = "Bryan Jim Paano";
-        this.userData.contactNumber = "+639123456789";
-        this.userData.password = "12345678";
+        this.userData = userDataService.user;
+        // this.userData.accountType = this.isLoggedIn ? "Customer" : "Food Provider";
+        // this.userData.email = "virtual.bjorn@gmail.com";
+        // this.userData.fullName = "Bryan Jim Paano";
+        // this.userData.contactNumber = "+639123456789";
+        // this.userData.password = "12345678";
         // this.userData.confirmPassword = "12345678";
         // this.userData.deliveryAddress = "Bldg 42-6/F PAT Bldg";
         // userDataService.updateUserData(this.userData);
@@ -60,11 +63,12 @@ export class AccountComponent {
         }
     }
 
-    proceedToOrderPage() {
+    proceedToOrderList() {
         if (this.isValidated()) {
-            this.navigationService.navigateToOrderPage();
+            this.navigationService.navigateToOrderList();
         }
     }
+
     onEditButton(textField: TextField) {
         textField.editable = !textField.editable;
     }

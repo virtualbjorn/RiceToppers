@@ -2,35 +2,34 @@ import { NgModule } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
 
-import { ProfileComponent } from "./views/profile/profile.component";
-import { OrderComponent } from "./views/order/order.component";
+import { OrderListComponent } from "./views/order/order-list.component";
 import { OrderReviewComponent } from "./views/order-review/order-review.component";
 import { HomeComponent } from "./views/home/home.component";
 import { FoodOutletComponent } from "./views/food-outlet/food-outlet.component";
 import { DashboardComponent } from "./views/dashboard/dashboard.component";
-import { AccountComponent } from "./views/account-and-signup/account.component";
-import { SignupComponent } from "./views/account-and-signup/signup.component";
+import { AccountComponent } from "./views/account/account.component";
+import { SignUpComponent } from "./views/signup/signup.component";
+import { LoginComponent } from "./views/login/login.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "dashboard", component: DashboardComponent },
     { path: "home", component: HomeComponent },
     { path: "foodOutletPage", component: FoodOutletComponent },
-    { path: "profilePage", component: ProfileComponent },
-    { path: "orderPage", component: OrderComponent },
+    { path: "order-list", component: OrderListComponent },
     { path: "account", component: AccountComponent },
-    { path: "signup", component: SignupComponent },
+    { path: "signup", component: SignUpComponent },
+    { path: "login", component: LoginComponent }
 ];
 
 export const NavigatableComponents = [
     DashboardComponent,
     HomeComponent,
     FoodOutletComponent,
-    ProfileComponent,
-    OrderComponent,
+    OrderListComponent,
     OrderReviewComponent,
     AccountComponent,
-    SignupComponent,
+    SignUpComponent,
 ]
 
 @NgModule({

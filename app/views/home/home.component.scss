@@ -27,8 +27,6 @@ StackLayout > GridLayout + GridLayout {
 }
 .food-image {
   border-radius: 10;
-  height: 100%;
-  width: 100%;
 }
 .food-detail-container {
   padding-left: 10;
@@ -42,7 +40,7 @@ StackLayout > GridLayout + GridLayout {
   font-size: 18px;
 }
 .food-description {
-  font-size: 10;
+  font-size: 12;
   color: #707070;
 }
 .icon-button {

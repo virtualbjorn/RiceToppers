@@ -44,7 +44,7 @@ button {
   horizontal-align: center;
 }
 
-RadSideDrawer>StackLayout {
+RadSideDrawer > StackLayout {
   font-family: "Lato-Regular";
   color: #ffffff;
 }
@@ -59,7 +59,8 @@ RadSideDrawer>StackLayout {
   vertical-align: center;
 }
 
-.main-content-wrapper, .main-app-background {
+.main-content-wrapper,
+.main-app-background {
   background: #ff9900;
 }
 
@@ -91,7 +92,9 @@ RadSideDrawer>StackLayout {
   margin: 0 0 10 10;
 }
 
-.sidedrawer-hamburger-button, .sidedrawer-button, .sidedrawer-button-icon {
+.sidedrawer-hamburger-button,
+.sidedrawer-button,
+.sidedrawer-button-icon {
   color: #ffffff;
   font-size: 25;
   border-width: 1;
@@ -114,7 +117,9 @@ RadSideDrawer>StackLayout {
   width: 70%;
   horizontal-align: center;
 }
-
+.back-button {
+  font-size: 20;
+}
 .button {
   vertical-align: middle;
   horizontal-align: center;
@@ -165,7 +170,7 @@ RadSideDrawer>StackLayout {
 
 .guest-mode-button {
   margin-top: 5;
-  background: #FF0000;
+  background: #ff0000;
 }
 
 .gridlayout-login {

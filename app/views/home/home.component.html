@@ -1,26 +1,29 @@
-<GridLayout rows="auto, *, auto" columns="10*, 2*">
-    <Label #foodMenuLabel row="0" col="0" text="Combo Ni Ante's Food Menu" textWrap="true" class="food-menu-label"></Label>
-    <Button row="0" col="1" text="&#xf2f1;" (tap)="onSyncFoodMenu()" [class]="isFoodMenuLoading ? 'fa icon-button sync-progress-icon-button' : 'fa icon-button sync-icon-button'"></Button>
-    <StackLayout row="1" colSpan="2" class="content-container" height="80%">
-        <ScrollView>
-            <StackLayout>
-                <GridLayout #foodItemGridLayout rows="100%" columns="4*, 9*" *ngFor="let foodItem of _foodMenuDataService.foodMenuList;">
-                    <Image col="0" class="food-image" stretch="aspectFill" src="~/assets/img/photos/chicken_cordon_bleu.jpg"></Image>
-                    <StackLayout col="1" class="food-detail-container">
-                        <Label text="{{foodItem.foodName}}" textWrap="true" class="food-name"></Label>
-                        <Label text="{{foodItem.foodDescription}}" textWrap="true" class="food-description"></Label>
-                    </StackLayout>
-                    <GridLayout *ngIf="!foodItem.isAvailable" row="0" colSpan="2" rows="*" columns="*" height="100%" class="food-item-not-available">
-                        <FlexboxLayout horizontalAlignment="center">
-                            <Label text="Not Available" row="0" col="0" textWrap="true" alignSelf="center" class="not-available-label"></Label>
-                        </FlexboxLayout>
+<StackLayout class="content-container--home">
+    <GridLayout rows="auto, *, auto" columns="10*, 2*">
+        <Label #foodMenuLabel row="0" col="0" text="Combo Ni Ante's Food Menu" textWrap="true" class="food-menu-label"></Label>
+        <Button row="0" col="1" text="&#xf2f1;" (tap)="onSyncFoodMenu()" [class]="!_foodMenuDataService.isFoodMenuParsed ? 'fa icon-button sync-progress-icon-button' : 'fa icon-button sync-icon-button'"></Button>
+        <StackLayout row="1" colSpan="2" class="content-container" height="80%">
+            <ScrollView>
+                <StackLayout>
+                    <GridLayout #foodItemGridLayout rows="100%" columns="4*, 9*" *ngFor="let foodItem of _foodMenuDataService.foodMenuList;">
+                        <Image col="0" class="food-image" stretch="aspectFill" src="~/assets/img/photos/chicken_cordon_bleu.jpg"></Image>
+                        <StackLayout col="1" class="food-detail-container">
+                            <Label text="{{foodItem.foodName}}" textWrap="true" class="food-name"></Label>
+                            <Label text="{{foodItem.foodDescription}}" textWrap="true" class="food-description"></Label>
+                        </StackLayout>
+                        <GridLayout *ngIf="!foodItem.isAvailable" row="0" colSpan="2" rows="*" columns="*" height="100%"
+                            class="food-item-not-available">
+                            <FlexboxLayout horizontalAlignment="center">
+                                <Label text="Not Available" row="0" col="0" textWrap="true" alignSelf="center" class="not-available-label"></Label>
+                            </FlexboxLayout>
+                        </GridLayout>
                     </GridLayout>
-                </GridLayout>
-            </StackLayout>
-        </ScrollView>
-    </StackLayout>
-    <StackLayout row="1" colSpan="2" class="activity-indicator-wrapper" *ngIf="isFoodMenuLoading">
-        <ActivityIndicator width="100" height="100" [busy]="isFoodMenuLoading" class="activity-indicator"></ActivityIndicator>
-    </StackLayout>
-    <Button row="2" colSpan="2" text="Order Now" (tap)="onOrderNow()" class="button" textWrap="true"></Button>
-</GridLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <StackLayout row="1" colSpan="2" class="activity-indicator-wrapper" *ngIf="!_foodMenuDataService.isFoodMenuParsed">
+            <ActivityIndicator width="100" height="100" [busy]="!_foodMenuDataService.isFoodMenuParsed" class="activity-indicator"></ActivityIndicator>
+        </StackLayout>
+        <Button row="2" colSpan="2" text="{{appComponent.isRegisteredUser ? 'Order Now' : 'Sign-up / Sign-in'}}" (tap)="onOrderNow()" class="button" textWrap="true"></Button>
+    </GridLayout>
+</StackLayout>

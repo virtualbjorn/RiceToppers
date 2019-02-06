@@ -1,24 +1,34 @@
 $updateImageSize: 80;
 $imageSizeContainer: 176;
-.account-signup-wrapper {
-  margin: 10 8 0 8;
-  padding: 0 8;
-  // width: 100%;
+.account-wrapper, .signup-wrapper {
+  margin: 10 2 0 8;
+  padding: 0 6 0 0;
 }
-.account-signup-header-label {
+.account-header-label, .signup-header-label {
   margin-top: 5;
   font-size: 30;
   horizontal-align: center;
   color: #000000;
   font-weight: bold;
 }
-.account-signup-image {
+.account-image, .signup-image {
   horizontal-align: center;
   width: 160;
   height: 160;
   border-radius: 160 * 2;
 }
-.account-signup-image-wrapper {
+.sign-up-image-button {
+  border-color: transparent;
+  background: transparent;
+  color: #707070;
+  width: 160;
+  font-size: 80;
+  height: 160;
+  border-width: 1;
+  vertical-align: middle;
+  horizontal-align: center;
+}
+.account-image-wrapper, .signup-image-wrapper {
   horizontal-align: center;
   width: $imageSizeContainer;
   height: $imageSizeContainer;
@@ -26,7 +36,7 @@ $imageSizeContainer: 176;
   border-radius: $imageSizeContainer * 2;
   border-color: #ff9900;
   margin-bottom: 20;
-  .account-signup-image-update {
+  .account-image-update, .signup-image-update {
     margin-top: $updateImageSize;
     background: rgba(0, 0, 0, 0.18);
     display: inline-block;
@@ -36,6 +46,9 @@ $imageSizeContainer: 176;
     border-bottom-right-radius: $updateImageSize * 2;
     text-align: center;
     padding-top: 15;
+    .upload-icon {
+      font-size: 25;
+    }
     label {
       color: #ffffff;
       font-size: 20;
@@ -56,10 +69,23 @@ StackLayout > .textfield-label {
   vertical-align: middle;
 }
 TextField {
-  padding: 0 0 3 7;
+  padding: 3 0 3 7;
   font-family: "Lato-Regular";
   font-weight: bold;
   height: 40;
+  color: #000000;
+  font-size: 21;
+  border-width: 1;
+  border-color: #ff9900;
+  border-radius: 8;
+  vertical-align: middle;
+}
+TextView {
+  padding: 0 0 3 7;
+  font-family: "Lato-Regular";
+  font-weight: bold;
+  color: #000000;
+  min-height: 80;
   font-size: 21;
   border-width: 1;
   border-color: #ff9900;

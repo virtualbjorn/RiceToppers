@@ -1,0 +1,33 @@
+<StackLayout class="content-container">
+    <Label text="Order List" textWrap="true" class="h3 order-list-header"></Label>
+    <GridLayout columns="*,auto" rows="*,auto" width="100%" height="100%">
+        <ScrollView colSpan="2" class="order-list-container">
+            <StackLayout class="{{orderDataService.orderCart.orderData.length != 0 ? 'order-item-container' : 'order-list-empty-container'}}">
+                <GridLayout columns="*,40" rows="auto,auto" *ngFor="let order of orderDataService.orderCart.orderData; let i = index;">
+                    <Label col="0" row="0" text="{{order.productName}}" textWrap="true" class="order-item"></Label>
+                    <Label col="0" row="1" text="{{order.piecesToOrder}}pc/s = Php{{order.totalPrice}}.00" textWrap="true"
+                        class="order-item-price"></Label>
+                    <!-- <Button text="&#xf044;" rowSpan="2" col="1" (tap)="modifyOrderData(i)" class="fa remove-modify-order"></Button> -->
+                    <Button text="&#xf056;" rowSpan="2" col="2" (tap)="removeOrderData(i)" class="fa remove-order"></Button>
+                </GridLayout>
+                <Label rowSpan="3" text="&#xf07a;" *ngIf="orderDataService.orderCart.orderData.length == 0" class="fa order-list-empty order-list-empty-icon"
+                    textWrap="true"></Label>
+                <Label row="1" text="YOUR ORDER LIST IS EMPTY" *ngIf="orderDataService.orderCart.orderData.length == 0"
+                    class="h4 order-list-empty" textWrap="true"></Label>
+                <Button text="Add New Order" (tap)="openFoodMenuModal()" textWrap="true" class="order-item-add-button"></Button>
+                <Label text="A minimum of Php100.00 is required to order." *ngIf="orderDataService.orderCart.totalAmountPayable < 100" textWrap="true" class="info-label"></Label>
+            </StackLayout>
+        </ScrollView>
+        <GridLayout row="1" colSpan="2" rows="auto, auto, auto" columns="auto, *, 130" class="total-amount-container">
+            <Label row="0" col="0" text="Total:" col="0" textWrap="true" class="h4 cart-food-detail-label-bold cart-total-amount-position cart-total-amount-label"></Label>
+            <Label row="0" col="1"text="Php{{orderDataService.orderCart.totalAmountPayable}}.00" col="1" textWrap="true" class="h3 cart-food-detail-label-bold cart-total-amount cart-total-amount-position"></Label>
+            <Checkbox #sendThroughSMSCheckbox row="1" col="0" class="send-through-sms-checkbox" (checkedChange)="sendThroughSMS(sendThroughSMSCheckbox)"></Checkbox>
+            <Label row="1" col="1" text="Send thru SMS" class="send-through-sms-label" textWrap="true" (tap)="sendThroughSMSCheckbox.toggle()"></Label>
+            <Checkbox #reserveCheckbox row="2" col="0" class="send-through-sms-checkbox" (checkedChange)="reserveOrder(reserveCheckbox)"></Checkbox>
+            <Label row="2" col="1" text="Reserve Order" class="send-through-sms-label" textWrap="true" (tap)="reserveCheckbox.toggle()"></Label>
+            <!-- <Button text="Reserve" (tap)="sendOrder()" rowSpan="2" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button> -->
+            <Button text="Send Order" (tap)="sendOrder()" rowSpan="2" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button>
+        </GridLayout>
+        <!-- <Button text="Add Order" (tap)="openFoodMenuModal()" class="order-item-add-button"></Button> -->
+    </GridLayout>
+</StackLayout>

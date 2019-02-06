@@ -1,0 +1,54 @@
+<StackLayout class="content-container">
+    <ScrollView>
+        <StackLayout class="signup-wrapper">
+            <Label text="Sign-up" textWrap="true" class="signup-header-label"></Label>
+            <AbsoluteLayout class="signup-image-wrapper">
+                <Image [src]="selectedImagePath" *ngIf="isImageUploaded" class="signup-image"></Image>
+                <StackLayout *ngIf="!isImageUploaded">
+                    <Button text="&#xf007;" class="fa sign-up-image-button"></Button>
+                </StackLayout>
+                <StackLayout class="signup-image-update" (tap)="onUploadImage()">
+                    <Label text="&#xf030;" textWrap="true" class="fa upload-icon"></Label>
+                    <Label text="Upload" textWrap="true" class="label-update"></Label>
+                </StackLayout>
+            </AbsoluteLayout>
+            <GridLayout columns="4*, 5*">
+                <Label text="Account Type" col="0" textWrap="true" class="textfield-label"></Label>
+                <TextField col="1" hint="Customer" [(ngModel)]="userData.accountType" editable="false" required></TextField>
+            </GridLayout>
+            <Label text="Email Address" textWrap="true" class="textfield-label"></Label>
+            <GridLayout columns="*, auto">
+                <TextField colSpan="2" hint="Email Address" [(ngModel)]="userData.email" keyboardType="email" required
+                    #emailAddressTextField></TextField>
+                <Button col="1" text="{{!userData.emailAddress ? '&#xf053;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
+                    (tap)="onEditButton(emailAddressTextField)"></Button>
+            </GridLayout>
+            <Label text="Full Name" textWrap="true" class="textfield-label"></Label>
+            <GridLayout columns="*, auto">
+                <TextField colSpan="2" hint="Name" [(ngModel)]="userData.fullName" required #fullNameTextField></TextField>
+                <Button col="1" text="{{!userData.fullName ? '&#xf053;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
+                    (tap)="onEditButton(fullNameTextField)"></Button>
+            </GridLayout>
+            <Label text="Contact Number" textWrap="true" class="textfield-label"></Label>
+            <GridLayout columns="*, auto">
+                <TextField colSpan="2" hint="Contact Number" [(ngModel)]="userData.contactNumber" keyboardType="number"
+                    required #contactNumberTextField></TextField>
+                <Button col="1" text="{{!userData.contactNumber ? '&#xf053;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
+                    (tap)="onEditButton(contactNumberTextField)"></Button>
+            </GridLayout>
+            <Label text="Delivery Address" textWrap="true" class="textfield-label"></Label>
+            <TextView hint="Delivery Address" textWrap="true" [(ngModel)]="userData.deliveryAddress" required></TextView>
+            <Label text="Password" textWrap="true" class="textfield-label"></Label>
+            <GridLayout columns="*, auto">
+                <TextField colSpan="2" hint="Password" [(ngModel)]="userData.password" secure="true" required
+                    #passwordTextField></TextField>
+                <Button col="1" text="{{!userData.password ? '&#xf053;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
+                    (tap)="onEditButton(passwordTextField)"></Button>
+            </GridLayout>
+            <Label text="* Confirm Password" textWrap="true" class="textfield-label"></Label>
+            <TextField hint="Confirm Password" [(ngModel)]="userData.confirmPassword" secure="true" required></TextField>
+            <Button text="Sign-up" (tap)="onSignUp()" class="button"></Button>
+        </StackLayout>
+    </ScrollView>
+    <app-loader></app-loader>
+</StackLayout>

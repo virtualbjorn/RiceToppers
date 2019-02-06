@@ -34,7 +34,7 @@ export class FoodOutletComponent implements OnInit {
             let foodMenuArrayResult = JSON.parse(JSON.stringify(result.data()));
             this.foodMenuArray = foodMenuArrayResult['combo-ni-ante'];
             foodMenuArrayResult['combo-ni-ante'].forEach((foodItem: any) => {
-                this.foodMenuData.push(new FoodMenuData(foodItem.fN, foodItem.fPC, foodItem.fPS, false, foodItem.iA));
+                this.foodMenuData.push(new FoodMenuData(foodItem.fN,foodItem.fPC, foodItem.fPS, foodItem.fD, false, foodItem.iA));
             });
             setTimeout(() => {
                 this.isLoading = !this.isLoading;

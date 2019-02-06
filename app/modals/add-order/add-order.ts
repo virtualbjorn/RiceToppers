@@ -30,17 +30,10 @@ export class AddOrderModalComponent implements OnInit {
         page: Page,
         private ngZone: NgZone,
         public orderDataService: OrderDataService,
-        private foodMenuService: FoodMenuService
+        public foodMenuService: FoodMenuService
     ) {
         this.foodMenuList = foodMenuService.foodMenuList;
-        ngZone.run(async () => {
-            await foodMenuService.setFoodMenuData();
-            this.foodMenuList = foodMenuService.foodMenuList;
-        });
         this.orderData = params.context;
-        page.on('unloaded', () => {
-            this.params.closeCallback();
-        });
     }
 
     ngOnInit() {
@@ -110,7 +103,7 @@ export class AddOrderModalComponent implements OnInit {
         this.params.closeCallback();
     }
 
-    onCancelButtonTap() {
+    onCloseModal() {
         this.params.closeCallback();
     }
 }

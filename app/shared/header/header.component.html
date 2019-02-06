@@ -1,0 +1,5 @@
+<GridLayout row="0" rows="auto" columns="*, 223, *">
+    <Button text="&#xf0c9;" (tap)="appComponent.openDrawer()" col="0" class="fa sidedrawer-hamburger-button" *ngIf="!appComponent.isSignUpUser"></Button>
+    <Button text="&#xf053; Back" (tap)="appComponent.backToLogin()" col="0" class="fa sidedrawer-hamburger-button back-button" *ngIf="appComponent.isSignUpUser"></Button>
+    <Image src="~/assets/img/logos/RiceToppers_Logo_Black.png" col="1"></Image>
+</GridLayout>

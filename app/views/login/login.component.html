@@ -1,0 +1,15 @@
+<GridLayout rows="*, auto, *">
+    <StackLayout row="1">
+        <Image src="~/assets/img/logos/RiceToppers_Logo_Black.png" class="logo-black-big"></Image>
+        <Label text="Healthy and Affordable Meals at your fingertips" textWrap="true" class="label-login"></Label>
+        <TextField class="textfield-login" hint="Email Address" [(ngModel)]="userData.email" keyboardType="email"
+            required></TextField>
+        <TextField class="textfield-login" hint="Password" [(ngModel)]="userData.password" secure="true" required></TextField>
+        <GridLayout class="gridlayout-login" rows="auto, auto" columns="*, *">
+            <Button row="0" col="0" text="Sign-up" textWrap="true" class="button button-login" (tap)="onSignUp()"></Button>
+            <Button row="0" col="1" text="Login" textWrap="true" class="button button-login" (tap)="onSignIn()"></Button>
+            <Button row="1" colSpan="2" text="Guest Mode" textWrap="true" class="button guest-mode-button button-login"
+                (tap)="onGuestMode()"></Button>
+        </GridLayout>
+    </StackLayout>
+</GridLayout>

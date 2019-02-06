@@ -16,7 +16,7 @@ export class UserDataService {
     }
 
     get userDetails(): string {
-        return `Customer Details\nName: ${this.userData.fullName}\nContact Number: ${this.userData.contactNumbers}\nDelivery Address: ${this.userData.deliveryAddress}`;
+        return `Customer Details\nName: ${this.userData.fullName}\nContact Number: ${this.userData.contactNumber}\nDelivery Address: ${this.userData.deliveryAddress}`;
     }
 
     get user(): UserData {

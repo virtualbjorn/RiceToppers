@@ -1,5 +1,7 @@
-import { Component, ViewChild, ElementRef, OnInit, AfterViewInit } from "@angular/core";
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit, DoCheck, ChangeDetectorRef, NgZone } from "@angular/core";
 import { FoodMenuService } from "~/services/food-menu-data/food-menu-data.service";
+import { NavigationService } from "~/services/navigation/navigation.service";
+import { AppComponent } from "~/app.component";
 
 @Component({
     selector: "app-home",
@@ -8,18 +10,28 @@ import { FoodMenuService } from "~/services/food-menu-data/food-menu-data.servic
     styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent {
-    isFoodMenuLoading: boolean = true;
-
-    constructor(public _foodMenuDataService: FoodMenuService) {
-        this.onSyncFoodMenu();
+    constructor(
+        public _foodMenuDataService: FoodMenuService,
+        private _navigationService: NavigationService,
+        private appComponent: AppComponent
+    ) {
+        appComponent.addToNavigationStack('home');
+        appComponent.isOnHomePage = true;
     }
 
     async onSyncFoodMenu() {
-        this.isFoodMenuLoading = true;
-        if (await this._foodMenuDataService.setFoodMenuData) {
-            setTimeout(() => {
-                this.isFoodMenuLoading = false;
-            }, 1000);
+        await this._foodMenuDataService.setFoodMenuData();
+    }
+
+    onOrderNow() {
+        if (this.appComponent.isRegisteredUser) {
+            this.appComponent.addToNavigationStack('order-list');
+            this.appComponent.isOnHomePage = false;
+            this._navigationService.navigateToOrderList();
+        } else {
+            this.appComponent.navigationStack = [];
+            this.appComponent.isOnHomePage = false;
+            this._navigationService.navigateToLogin();
         }
     }
 }

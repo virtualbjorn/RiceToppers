@@ -17,12 +17,12 @@ export class EmailService {
         return nrOfMailApps;
     }
 
-    compose(orderDetails: string, orderID: string) {
+    compose(orderDetails: string, orderID: string, isReserveOrder) {
         try {
             let mail = new this.androidIntent(this.androidIntent.ACTION_SENDTO);
             mail.putExtra(this.androidIntent.EXTRA_TEXT, orderDetails);
             mail.setType('text/plain');
-            mail.putExtra(this.androidIntent.EXTRA_SUBJECT, `RiceToppers OrderID ${orderID}`)
+            mail.putExtra(this.androidIntent.EXTRA_SUBJECT, `RiceToppers OrderID ${orderID} - For ${isReserveOrder ? 'Reservation' : 'Delivery'}`)
             mail.putExtra(this.androidIntent.EXTRA_EMAIL, this.toStringArray(this.email));
 
             mail.setData(android.net.Uri.parse('mailto:'));

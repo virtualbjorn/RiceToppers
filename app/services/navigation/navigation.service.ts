@@ -8,21 +8,21 @@ export class NavigationService {
   private DURATION_TIME = 250;
 
   goBack() {
-    this._routerExt.backToPreviousPage();
+    this._routerExt.back();
   }
 
-  // navigateToPage(navigateToPage: string, clearHistory: boolean, transitions: string) {
-  //   this._routerExt.navigate([`/${navigateToPage}`], {
-  //     clearHistory: clearHistory, animated: true, transition: {
-  //       name: transitions,
-  //       duration: this.DURATION_TIME,
-  //       curve: "linear"
-  //     }
-  //   });
-  // }
+  navigateTo(navigateToUrl: string) {
+    this._routerExt.navigate([`/${navigateToUrl}`], {
+      clearHistory: true, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
 
-  navigateToOrderPage() {
-    this._routerExt.navigate(["/orderPage"], {
+  navigateToOrderList() {
+    this._routerExt.navigate(["/order-list"], {
       clearHistory: false, animated: true, transition: {
         name: "slideLeft",
         duration: this.DURATION_TIME,
@@ -31,18 +31,8 @@ export class NavigationService {
     });
   }
 
-  navigateToProfilePage() {
-    this._routerExt.navigate(["/profilePage"], {
-      clearHistory: true, animated: true, transition: {
-        name: "fade",
-        duration: this.DURATION_TIME,
-        curve: "linear"
-      }
-    });
-  }
-
-  navigateToHomePage() {
-    this._routerExt.navigate(["/homePage"], {
+  navigateToHome() {
+    this._routerExt.navigate(["/home"], {
       clearHistory: true, animated: true, transition: {
         name: "fade",
         duration: this.DURATION_TIME,
@@ -51,8 +41,8 @@ export class NavigationService {
     });
   }
   
-  navigateToFoodOutletPage() {
-    this._routerExt.navigate(["/foodOutletPage"], {
+  navigateToFoodOutlet() {
+    this._routerExt.navigate(["/food-outlet"], {
       clearHistory: true, animated: true, transition: {
         name: "fade",
         duration: this.DURATION_TIME,
@@ -61,7 +51,7 @@ export class NavigationService {
     });
   }
 
-  navigateToAccountPage() {
+  navigateToAccount() {
     this._routerExt.navigate(["/account"], {
       clearHistory: true, animated: true, transition: {
         name: "fade",
@@ -71,7 +61,7 @@ export class NavigationService {
     });
   }
 
-  navigateToSignupPage() {
+  navigateToSignUp() {
     this._routerExt.navigate(["/signup"], {
       clearHistory: false, animated: true, transition: {
         name: "fade",
@@ -81,7 +71,7 @@ export class NavigationService {
     });
   }
   
-  navigateToLoginPage() {
+  navigateToLogin() {
     this._routerExt.navigate(["/login"], {
       clearHistory: true, animated: true, transition: {
         name: "fade",

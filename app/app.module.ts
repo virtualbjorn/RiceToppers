@@ -6,7 +6,6 @@ import { AppComponent } from "./app.component";
 import { OrderDataService } from './services/order-data/order-data.service';
 import { NavigationService } from './services/navigation/navigation.service';
 import { AddOrderModalComponent } from './modals/add-order/add-order';
-import { CartModalComponent } from './modals/cart/cart';
 import { UserDataService } from './services/user-data/user-data.service';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -17,6 +16,10 @@ import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular';
+import { SharedModule } from "./shared/shared.module";
+import { LoginComponent } from "./views/login/login.component";
+import { ModalDialogService } from "nativescript-angular";
+import { UIHelperService } from "./services/ui-helper/ui-helper.service";
 
 @NgModule({
     bootstrap: [
@@ -27,24 +30,26 @@ import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angul
         NativeScriptFormsModule,
         AppRoutingModule,
         TNSCheckBoxModule,
-        NativeScriptUISideDrawerModule
+        NativeScriptUISideDrawerModule,
+        SharedModule
     ],
     declarations: [
         AppComponent,
         NavigatableComponents,
         AddOrderModalComponent,
-        CartModalComponent
+        LoginComponent
     ],
     entryComponents: [
         AddOrderModalComponent,
-        CartModalComponent
     ],
     providers: [
+        ModalDialogService,
         OrderDataService,
         NavigationService,
         UserDataService,
         EmailService,
-        FoodMenuService
+        FoodMenuService,
+        UIHelperService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

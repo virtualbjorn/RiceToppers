@@ -1,13 +1,10 @@
 <StackLayout class="food-list-main-container">
-    <Label text="PICK YOUR TOPPINGS" textWrap="true" class="h3 food-menu-header"></Label>
-    <!-- <FlexboxLayout justifyContent="space-between" alignItems="center" class="combo-container">
-        <Label text="Combo Package" class="combo-text font-weight-bold" textWrap="true"></Label>
-        <Label text="{{isCombo ? 'Yes' : 'No'}}" class="food-item" textWrap="true"></Label>
-        <Switch [checked]="false" (checkedChange)="onComboSwitchChecked($event)" class="switch"></Switch>
-    </FlexboxLayout> -->
+    <GridLayout rows="auto" columns="*, auto, *">
+        <Label col="1" text="PICK YOUR TOPPINGS" textWrap="true" class="h3 food-menu-header"></Label>
+        <Button col="2" text="&#xf00d;" (tap)="onCloseModal()" class="fa close-modal"></Button>
+    </GridLayout>
     <GridLayout rows="*,auto" class="food-list-container">
         <ScrollView row="0">
-            <!-- <ScrollView row="0" style="border-bottom-width: 2; border-bottom-color: #f39237;"> -->
             <StackLayout class="food-list-container-1">
                 <Checkbox text="{{foodItem.foodName}}" checked="false" class="food-item" (checkedChange)="updateOrderData($event, foodItem)"
                     isEnabled="{{(selectedFoodItem < 2 || foodItem.isSelected) && foodItem.isAvailable}}" *ngFor="let foodItem of foodMenuList"></Checkbox>
@@ -27,9 +24,5 @@
             </StackLayout>
             <Button col="1" text="&#xf217;" (tap)="addOrder()" class="fa modal-button-add"></Button>
         </GridLayout>
-        <!-- <StackLayout class="food-list-container-1" row="1">
-            <Label text="Addons:" class="food-item" textWrap="true"></Label>
-            <Checkbox text="Rice" checked="false" class="food-item" (checkedChange)="addRice($event)"></Checkbox>
-        </StackLayout> -->
     </GridLayout>
 </StackLayout>
