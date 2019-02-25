@@ -27,21 +27,10 @@ export class FirebaseAPIService {
         });
     }
 
-    createUserData(user: any): Promise<void> {
+    createUserData(user: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            firebase.firestore.collection(user.accountType).doc(user.uid).set({
-                uid: user.uid,
-                accountCreated: user.metadata.creationTimestamp,
-                firstName: user.firstName,
-                middleName: user.middleName,
-                lastName: user.lastName,
-                contactNo: user.contactNo,
-                address: user.address,
-                imageUrl: user.imageUrl,
-                accountType: user.accountType,
-                email: user.email
-            }).then((response) => {
-                resolve(response);
+            firebase.firestore.collection(user.accountType).doc(user.uid).set(user).then(() => {
+                resolve({ success: true });
             }).catch((error) => {
                 reject(error);
             });
@@ -58,6 +47,7 @@ export class FirebaseAPIService {
                     console.log("Percentage complete: " + status.percentageCompleted);
                 }
             }).then((response) => {
+                this.getDownloadURL(uid);
                 resolve(response);
             }).catch((error) => {
                 reject(error);
@@ -70,6 +60,7 @@ export class FirebaseAPIService {
             firebase.storage.getDownloadUrl({
                 remoteFullPath: `profile-images/${uid}.png`
             }).then((response) => {
+                firebase.firestore.collection('customer').doc(uid).update({ imageUrl: response });
                 resolve(response);
             }).catch((error) => {
                 reject(error);
@@ -161,7 +152,7 @@ export class FirebaseAPIService {
             try {
 
             } catch (error) {
-                
+
             }
         });
     }

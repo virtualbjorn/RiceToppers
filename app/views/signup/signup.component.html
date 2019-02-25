@@ -59,7 +59,7 @@
                     class="button add-new-address--button"></Button>
             </GridLayout>
             <GridLayout columns="*, auto" *ngFor="let address of tempAddressArray; let i = index" class="address-container">
-                <TextView col="0" hint="Address {{i + 1}}" textWrap="true" [(ngModel)]="userData.address[i]" (ngModelChange)="check($event)" required></TextView>
+                <TextView col="0" hint="Address {{i + 1}}" textWrap="true" [(ngModel)]="userData.address[i]" required></TextView>
                 <Button col="1" text="&#xf00d;" *ngIf="i != 0" (tap)="onRemoveAddress(i)" class="fa x-button"></Button>
             </GridLayout>
             <Label text="Password" textWrap="true" class="textfield-label"></Label>

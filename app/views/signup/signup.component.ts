@@ -69,10 +69,8 @@ export class SignUpComponent {
         if (this.isValidated()) {
             try {
                 let createUserResult: firebase.User = await this._ngFire.createUser(this.userData.email, this.userData.password);
-                let downloadUrlResult = '';
                 if (this.selectedImagePath) {
-                    await this._ngFire.uploadFile(this.selectedImagePath, createUserResult.uid);
-                    downloadUrlResult = await this._ngFire.getDownloadURL(createUserResult.uid);
+                    this._ngFire.uploadFile(this.selectedImagePath, createUserResult.uid);
                 }
                 let userData: UserData = {
                     uid: createUserResult.uid,
@@ -81,17 +79,18 @@ export class SignUpComponent {
                     middleName: this.userData.middleName,
                     lastName: this.userData.lastName,
                     contactNo: this.userData.contactNo,
-                    address: [this.userData.deliveryAddress],
-                    imageUrl: downloadUrlResult,
-                    accountType: this.userData.accountType,
+                    address: this.userData.address,
+                    imageUrl: '',
+                    accountType: this.userData.accountType.toLowerCase(),
                     email: createUserResult.email
-                }
-                await this._ngFire.createUserData(userData);
+                };
+                let success = await this._ngFire.createUserData(userData);
                 this._uiHelper.hideLoader();
                 dialogs.alert({ message: 'Sign-up successful!', okButtonText: 'OK' });
                 this.appComponent.isSignUpUser = false;
                 this._navigationService.navigateToLogin();
             } catch (error) {
+                console.dir(error);
                 dialogs.alert({ message: error.split(': ')[1], okButtonText: 'OK' });
                 this._uiHelper.hideLoader();
             }
@@ -129,13 +128,8 @@ export class SignUpComponent {
     }
 
     onRemoveAddress(index: number) {
-        console.log('hello');
-        console.log(this.tempAddressArray.splice(index, 1));
-        console.log(this.userData.address.splice(index, 1));
+        this.tempAddressArray.splice(index, 1);
+        this.userData.address.splice(index, 1);
         --this.addressCount;
-    }
-
-    check(args: any) {
-        console.dir(args);
     }
 }
