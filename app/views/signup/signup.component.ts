@@ -10,6 +10,7 @@ import * as imagepicker from "nativescript-imagepicker";
 import { isAndroid } from "tns-core-modules/ui/page/page";
 import * as fs from 'file-system';
 import { fromAsset } from "tns-core-modules/image-source/image-source";
+import { FirebaseAPIService } from "~/services/firebase-api/firebase-api.service";
 
 @Component({
     selector: 'app-signup',
@@ -22,41 +23,41 @@ export class SignUpComponent {
     uploadedImageData: any;
     selectedImagePath: string;
     isImageUploaded: boolean = false;
+
+    addressCount: number = 1;
+    tempAddressArray: string[] = new Array<string>(this.addressCount);
+
     constructor(
         private _navigationService: NavigationService,
         private appComponent: AppComponent,
-        private _uiHelper: UIHelperService
+        private _uiHelper: UIHelperService,
+        private _ngFire: FirebaseAPIService
     ) {
         appComponent.isSignUpUser = true;
+        this.userData.address = new Array<string>();
         this.userData.accountType = 'Customer';
     }
 
     isValidated(): boolean {
-        if (!this.selectedImagePath) {
-            dialogs.alert({ message: 'Please upload an image.', okButtonText: 'OK' });
-            return false;
-        }
         if (!this.userData.email) {
             dialogs.alert({ message: 'Please enter a valid email address.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.fullName) {
-            dialogs.alert({ message: 'Please enter a valid name.', okButtonText: 'OK' });
+        } else if (!this.userData.firstName) {
+            dialogs.alert({ message: 'Please enter a valid first name.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.contactNumber) {
+        } else if (!this.userData.middleName) {
+            dialogs.alert({ message: 'Please enter a valid middle name.', okButtonText: 'OK' });
+            return false;
+        } else if (!this.userData.lastName) {
+            dialogs.alert({ message: 'Please enter a valid last name.', okButtonText: 'OK' });
+            return false;
+        } else if (!this.userData.contactNo) {
             dialogs.alert({ message: 'Please enter a valid contact number.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.deliveryAddress) {
-            dialogs.alert({ message: 'Please enter a valid delivery address.', okButtonText: 'OK' });
-            return false;
-        }
-        if (!this.userData.password) {
+        } else if (!this.userData.password) {
             dialogs.alert({ message: 'Please enter a valid password.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.confirmPassword) {
+        } else if (!this.userData.confirmPassword) {
             dialogs.alert({ message: 'Please re-enter your password.', okButtonText: 'OK' });
             return false;
         }
@@ -64,48 +65,38 @@ export class SignUpComponent {
     }
 
     async onSignUp() {
-        // this.appComponent.isLoading = true;
         this._uiHelper.showLoader('Signing-up...');
         if (this.isValidated()) {
             try {
-                let createUserResult: firebase.User = await firebase.createUser({
-                    email: this.userData.email,
-                    password: this.userData.password
-                });
-                await firebase.storage.uploadFile({
-                    remoteFullPath: `user-profile-images/${createUserResult.uid}.png`,
-                    localFile: fs.File.fromPath(this.selectedImagePath),
-                    onProgress: (status) => {
-                        console.log("Uploaded fraction: " + status.fractionCompleted);
-                        console.log("Percentage complete: " + status.percentageCompleted);
-                    }
-                });
-                let downloadUrlResult = await firebase.storage.getDownloadUrl({
-                    remoteFullPath: `user-profile-images/${createUserResult.uid}.png`
-                });
-                firebase.firestore.collection('users').doc(createUserResult.uid).set({
+                let createUserResult: firebase.User = await this._ngFire.createUser(this.userData.email, this.userData.password);
+                let downloadUrlResult = '';
+                if (this.selectedImagePath) {
+                    await this._ngFire.uploadFile(this.selectedImagePath, createUserResult.uid);
+                    downloadUrlResult = await this._ngFire.getDownloadURL(createUserResult.uid);
+                }
+                let userData: UserData = {
                     uid: createUserResult.uid,
-                    accountCreated: createUserResult.metadata.creationTimestamp,
-                    fullName: this.userData.fullName,
-                    contactNo: this.userData.contactNumber,
-                    deliveryAddress: this.userData.deliveryAddress,
+                    accountCreated: createUserResult.metadata.creationTimestamp.toString(),
+                    firstName: this.userData.firstName,
+                    middleName: this.userData.middleName,
+                    lastName: this.userData.lastName,
+                    contactNo: this.userData.contactNo,
+                    address: [this.userData.deliveryAddress],
                     imageUrl: downloadUrlResult,
-                    accountType: 'Customer',
+                    accountType: this.userData.accountType,
                     email: createUserResult.email
-                });
+                }
+                await this._ngFire.createUserData(userData);
                 this._uiHelper.hideLoader();
-                // this.appComponent.isLoading = false;
                 dialogs.alert({ message: 'Sign-up successful!', okButtonText: 'OK' });
                 this.appComponent.isSignUpUser = false;
                 this._navigationService.navigateToLogin();
             } catch (error) {
                 dialogs.alert({ message: error.split(': ')[1], okButtonText: 'OK' });
                 this._uiHelper.hideLoader();
-                // this.appComponent.isLoading = false;
             }
         } else {
             this._uiHelper.hideLoader();
-            // this.appComponent.isLoading = false;
         }
     }
 
@@ -130,5 +121,21 @@ export class SignUpComponent {
                 // process error
                 this.isImageUploaded = false;
             });
+    }
+
+    onAddNewAddress() {
+        this.userData.address[this.addressCount++] = '';
+        this.tempAddressArray = new Array<string>(this.addressCount);
+    }
+
+    onRemoveAddress(index: number) {
+        console.log('hello');
+        console.log(this.tempAddressArray.splice(index, 1));
+        console.log(this.userData.address.splice(index, 1));
+        --this.addressCount;
+    }
+
+    check(args: any) {
+        console.dir(args);
     }
 }

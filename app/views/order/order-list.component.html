@@ -25,9 +25,7 @@
             <Label row="1" col="1" text="Send thru SMS" class="send-through-sms-label" textWrap="true" (tap)="sendThroughSMSCheckbox.toggle()"></Label>
             <Checkbox #reserveCheckbox row="2" col="0" class="send-through-sms-checkbox" (checkedChange)="reserveOrder(reserveCheckbox)"></Checkbox>
             <Label row="2" col="1" text="Reserve Order" class="send-through-sms-label" textWrap="true" (tap)="reserveCheckbox.toggle()"></Label>
-            <!-- <Button text="Reserve" (tap)="sendOrder()" rowSpan="2" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button> -->
             <Button text="Send Order" (tap)="sendOrder()" rowSpan="2" col="2" class="fa btn btn-primary proceed-btn cart-check-out"></Button>
         </GridLayout>
-        <!-- <Button text="Add Order" (tap)="openFoodMenuModal()" class="order-item-add-button"></Button> -->
     </GridLayout>
 </StackLayout>

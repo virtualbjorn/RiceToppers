@@ -116,3 +116,21 @@ TextView {
   padding: 0 20 0;
   color: #ffffff;
 }
+.add-new-address--button {
+  height: 30;
+  font-size: 18;
+  horizontal-align: right;
+}
+.x-button {
+  height: 35;
+  width: 35;
+  font-size: 25;
+  padding: 0;
+  color: #ffffff;
+  border-radius: 50%;
+  background: #ff0000;
+  margin-left: 10;
+}
+.address-container {
+  margin-bottom: 10;
+}

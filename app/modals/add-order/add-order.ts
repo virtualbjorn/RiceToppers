@@ -7,6 +7,9 @@ import { FoodMenuData } from '~/models/food-menu-data';
 import { FoodMenuService } from '~/services/food-menu-data/food-menu-data.service';
 import { StackLayout } from 'ui/layouts/stack-layout';
 import * as firebase from 'nativescript-plugin-firebase';
+import * as application from 'tns-core-modules/application';
+import * as platform from 'tns-core-modules/platform';
+import { AppComponent } from '~/app.component';
 
 @Component({
     moduleId: module.id,
@@ -30,10 +33,16 @@ export class AddOrderModalComponent implements OnInit {
         page: Page,
         private ngZone: NgZone,
         public orderDataService: OrderDataService,
-        public foodMenuService: FoodMenuService
+        public foodMenuService: FoodMenuService,
+        appComponent: AppComponent
     ) {
+        appComponent.addToNavigationStack('add-order-modal');
         this.foodMenuList = foodMenuService.foodMenuList;
         this.orderData = params.context;
+        application.android.on(application.AndroidApplication.activityBackPressedEvent, (backPressed: any) => {
+            backPressed.cancel = true;
+            this.params.closeCallback();
+        });
     }
 
     ngOnInit() {

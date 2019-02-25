@@ -40,7 +40,7 @@ export class NavigationService {
       }
     });
   }
-  
+
   navigateToFoodOutlet() {
     this._routerExt.navigate(["/food-outlet"], {
       clearHistory: true, animated: true, transition: {
@@ -53,7 +53,7 @@ export class NavigationService {
 
   navigateToAccount() {
     this._routerExt.navigate(["/account"], {
-      clearHistory: true, animated: true, transition: {
+      clearHistory: false, animated: true, transition: {
         name: "fade",
         duration: this.DURATION_TIME,
         curve: "linear"
@@ -70,10 +70,20 @@ export class NavigationService {
       }
     });
   }
-  
+
   navigateToLogin() {
     this._routerExt.navigate(["/login"], {
       clearHistory: true, animated: true, transition: {
+        name: "fade",
+        duration: this.DURATION_TIME,
+        curve: "linear"
+      }
+    });
+  }
+
+  navigateToOrderHistory() {
+    this._routerExt.navigate(["/order-history"], {
+      clearHistory: false, animated: true, transition: {
         name: "fade",
         duration: this.DURATION_TIME,
         curve: "linear"

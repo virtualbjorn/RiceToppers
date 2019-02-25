@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import * as phone from 'nativescript-phone';
 import * as dialogs from 'ui/dialogs';
 import { AppComponent } from '~/app.component';
+import { FirebaseAPIService } from '~/services/firebase-api/firebase-api.service';
 
 @Component({
     selector: "orderList",
@@ -32,7 +33,8 @@ export class OrderListComponent {
         private emailService: EmailService,
         public orderDataService: OrderDataService,
         private userDataService: UserDataService,
-        private appComponent: AppComponent
+        private appComponent: AppComponent,
+        private _ngFire: FirebaseAPIService
     ) {
         appComponent.addToNavigationStack('order-list');
         this.userData = userDataService.user;
@@ -66,8 +68,10 @@ export class OrderListComponent {
 
     async sendOrder() {
         if (this.orderDataService.orderCart.orderData.length && this.orderDataService.orderCart.totalAmountPayable >= 100) {
+            let timecreated = moment().format('MM/DD/YY-HH:mm');
             this.orderID = this.userData.uid + moment().format('MMDDYYHHmm');
-            this.orderDetail = `${this.userDataService.userDetails}\n\n${this.orderDataService.orderDetails}`;
+            let userDetails = await this.userDataService.userDetails();
+            this.orderDetail = `Customer Details\nName: ${userDetails.name}\nContact Number: ${userDetails.contactNo}\nDelivery Address: ${userDetails.deliveryAddress}\nOrder Type: For ${this.isReserveOrder ? 'Reservation' : 'Delivery'}\n\n${this.orderDataService.orderDetails}`;
 
             if (this.isSMS) {
                 phone.sms(['+639163601454'], this.orderDetail);
@@ -75,10 +79,13 @@ export class OrderListComponent {
                 try {
                     this.emailService.compose(this.orderDetail, this.orderID, this.isReserveOrder);
                 } catch (error) {
+                    await dialogs.alert({message: 'Unable to detect your email apps. Please make sure that you have an email service installed! Using SMS instead.', okButtonText: 'OK'});
                     phone.sms(['+639163601454'], this.orderDetail);
                 }
             }
             if (await dialogs.confirm({ message: "Please tap OK if you've already sent your order.", okButtonText: 'OK', cancelButtonText: 'NO' })) {
+                let orderCreationResponse = await this._ngFire.createOrderData(this.orderDataService.orderCart, userDetails, this.isReserveOrder, this.userData.uid, timecreated);
+                console.dir(orderCreationResponse);
                 this.orderDataService.resetOrders();
                 this.navigationService.navigateToHome();
             }

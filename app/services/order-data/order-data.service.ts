@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { OrderCart } from '../../models/order-cart';
-import { OrderData } from '../../models/order-data';
+import { OrderData, OrderHistory } from '../../models/order-data';
 
 @Injectable()
 export class OrderDataService {
     orderCart: OrderCart = new OrderCart();
     orderData: Array<OrderData> = new Array<OrderData>();
+    orderHistory: Array<OrderHistory> = new Array<OrderHistory>();
     
     addOrder(orderDetails: OrderData) {
         let totalAmountPayable = 0;
@@ -38,9 +39,9 @@ export class OrderDataService {
     get orderDetails(): string {
         let orderList: string = 'Order Details:';
         this.orderCart.orderData.map((order) => {
-            orderList = orderList.concat('\n', `${order.piecesToOrder + (order.piecesToOrder > 1 ? 'pcs' : 'pc')} of ${order.productName} = Php ${order.totalPrice}.00`);
+            orderList = orderList.concat('\n', `${order.piecesToOrder + (order.piecesToOrder > 1 ? 'pcs' : 'pc')} of ${order.productName} = Php ${order.totalPrice.toFixed(2)}`);
         });
-        orderList = orderList.concat('\n\n', `Total Amount Payable: Php ${this.orderCart.totalAmountPayable}.00`)
+        orderList = orderList.concat('\n\n', `Total Amount Payable: Php ${this.orderCart.totalAmountPayable.toFixed(2)}`)
         return orderList;
     }
 }

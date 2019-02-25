@@ -1,0 +1,32 @@
+<StackLayout class="content-container">
+    <GridLayout rows="auto" columns="10*, 2*">
+        <Label row="0" col="0" colSpan="2" text="Order History" textWrap="true" class="h3 order-history-header"></Label>
+        <Button row="0" col="1" text="&#xf2f1;" (tap)="onSyncOrderHistory()"
+            [class]="!isOrderHistory ? 'fa icon-button sync-progress-icon-button' : 'fa icon-button sync-icon-button'"></Button>
+    </GridLayout>
+    <GridLayout columns="*,auto" rows="*,auto" width="100%" height="100%">
+        <ScrollView colSpan="2" class="order-history-container">
+            <StackLayout
+                class="{{_orderData.orderHistory.length != 0 ? 'order-history-list-container' : 'order-history-empty-container'}}">
+                <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto" class="order-item-container"
+                    *ngFor="let order of _orderData.orderHistory; let i = index;">
+                    <Label row="0" col="0" text="Order Status:" textWrap="true" class="order-item"></Label>
+                    <Label row="1" col="0" text="Order Type:" textWrap="true" class="order-item"></Label>
+                    <Label row="2" col="0" text="Order ID:" textWrap="true" class="order-item"></Label>
+                    <Label row="3" col="0" text="Total Amount:" textWrap="true" class="order-item"></Label>
+                    <Label row="4" col="0" text="Date Created:" textWrap="true" class="order-item"></Label>
+                    <Label row="0" col="1" text="{{order.orderStatus}}" textWrap="true" class="order-item-data"></Label>
+                    <Label row="1" col="1" text="{{order.orderType}}" textWrap="true" class="order-item-data"></Label>
+                    <Label row="2" col="1" text="{{order.id}}" textWrap="true" class="order-item-data"></Label>
+                    <Label row="3" col="1" text="{{order.totalAmountPayable | currency:'PHP'}}" textWrap="true"
+                        class="order-item-data"></Label>
+                    <Label row="4" col="1" text="{{order.timecreated}}" textWrap="true" class="order-item-data"></Label>
+                </GridLayout>
+                <Label rowSpan="3" text="&#xf022;" *ngIf="_orderData.orderHistory.length == 0"
+                    class="fa order-history-empty order-history-empty-icon" textWrap="true"></Label>
+                <Label row="1" text="Your order history is empty." *ngIf="_orderData.orderHistory.length == 0"
+                    class="h4 order-history-empty" textWrap="true"></Label>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+</StackLayout>

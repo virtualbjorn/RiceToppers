@@ -11,12 +11,14 @@ import { NavigationService } from "./services/navigation/navigation.service";
 import { UserDataService } from "./services/user-data/user-data.service";
 import { ActivatedRoute } from "@angular/router";
 import { LoginComponent } from "./views/login/login.component";
+import { FirebaseAPIService } from "./services/firebase-api/firebase-api.service";
+import { UIHelperService } from "./services/ui-helper/ui-helper.service";
 
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html"
 })
-export class AppComponent implements AfterViewInit, DoCheck {
+export class AppComponent implements OnInit, AfterViewInit, DoCheck {
     activeUsers: number = 0;
     fireStoreActiveUsers: firebase.firestore.DocumentReference;
 
@@ -38,9 +40,11 @@ export class AppComponent implements AfterViewInit, DoCheck {
     constructor(
         private _changeDetectionRef: ChangeDetectorRef,
         private _navigationService: NavigationService,
-        _userDataService: UserDataService,
+        private _userDataService: UserDataService,
         private _activatedRoute: ActivatedRoute,
-        private _ngZone: NgZone,
+        _ngZone: NgZone,
+        private _ngFire: FirebaseAPIService,
+        private _uiHelper: UIHelperService
     ) {
         let View = android.view.View;
         if (application.android && platform.device.sdkVersion >= '21') {
@@ -54,33 +58,56 @@ export class AppComponent implements AfterViewInit, DoCheck {
                     if (this.isSignUpUser) {
                         this.isSignUpUser = false;
                     }
-                    this._navigationService.goBack();
+                    if (this.navigationStack[this.navigationStack.length - 1] == 'order-list') {
+                        this.navigationStack.pop();
+                        this._navigationService.navigateToHome();
+                    } else if (this.navigationStack[this.navigationStack.length - 1] != 'add-order-modal') {
+                        this._navigationService.goBack();
+                    } else {
+                        this.navigationStack.pop();
+                    }
                 }
-                // if (this.navigationStack.length > 1) {
-                //     this.navigationStack.pop();
-                //     this._navigationService.navigateTo(this.navigationStack.pop());
-                // }
             });
         });
-        this.currentUserName = this.isRegisteredUser ? "Bryan" : "Guest";
+        this.currentUserName = this.isRegisteredUser ? _userDataService.user.firstName : "Guest";
         firebase.init({
             persist: true
         });
-        // application.on(application.resumeEvent, (args) => {
-        //     console.log("App Resume");
-        //     this.foreground();
-        // });
+        application.on(application.resumeEvent, (args) => {
+            console.log("App Resume");
+            this.foreground();
+        });
 
-        // application.on(application.suspendEvent, (args) => {
-        //     console.log("App Suspended");
-        //     this.suspended();
-        // });
+        application.on(application.suspendEvent, (args) => {
+            console.log("App Suspended");
+            this.suspended();
+        });
+
+    }
+
+    async ngOnInit() {
         if (localStorage.getItem('User Data')) {
-            _userDataService.updateUserData(JSON.parse(JSON.stringify(localStorage.getItem('User Data'))));
+            let userData = JSON.parse(JSON.stringify(localStorage.getItem('User Data')));
+            let result = await this._ngFire.getUserData(userData);
+            let userParsedData = JSON.parse(JSON.stringify(result.data()));
+            userData = {
+                uid: userParsedData.uid,
+                imageUrl: userParsedData.imageUrl,
+                firstName: userParsedData.firstName,
+                middleName: userParsedData.middleName,
+                lastName: userParsedData.lastName,
+                contactNo: userParsedData.contactNo,
+                email: userParsedData.email,
+                accountType: userParsedData.accountType,
+                confirmPassword: '',
+                password: userData.password,
+                address: userParsedData.address
+            };
+            this._userDataService.updateUserData(userData);
             this.navigationStack = [];
             this.isRegisteredUser = true;
             this.isOnLoginPage = false;
-            _navigationService.navigateToHome();
+            this._navigationService.navigateToHome();
         }
     }
 
@@ -156,6 +183,11 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
     onAccountSettings() {
         this._navigationService.navigateToAccount();
+        this.drawer.closeDrawer();
+    }
+
+    onViewOrderHistory() {
+        this._navigationService.navigateToOrderHistory();
         this.drawer.closeDrawer();
     }
 

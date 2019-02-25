@@ -20,6 +20,7 @@ import { SharedModule } from "./shared/shared.module";
 import { LoginComponent } from "./views/login/login.component";
 import { ModalDialogService } from "nativescript-angular";
 import { UIHelperService } from "./services/ui-helper/ui-helper.service";
+import { FirebaseAPIService } from "./services/firebase-api/firebase-api.service";
 
 @NgModule({
     bootstrap: [
@@ -49,7 +50,8 @@ import { UIHelperService } from "./services/ui-helper/ui-helper.service";
         UserDataService,
         EmailService,
         FoodMenuService,
-        UIHelperService
+        UIHelperService,
+        FirebaseAPIService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

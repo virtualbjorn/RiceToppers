@@ -5,6 +5,7 @@ import { UserDataService } from '../../services/user-data/user-data.service';
 import * as dialogs from 'ui/dialogs';
 import { localStorage } from '~/main';
 import { TextField } from 'ui/text-field';
+import { FirebaseAPIService } from '~/services/firebase-api/firebase-api.service';
 
 @Component({
     selector: "app-account",
@@ -20,36 +21,32 @@ export class AccountComponent {
 
     constructor(
         private navigationService: NavigationService,
-        private userDataService: UserDataService
+        private userDataService: UserDataService,
+        private _ngFire: FirebaseAPIService
     ) {
         if (userDataService.isUserData) {
             this.userData = userDataService.user;
         }
         this.userData = userDataService.user;
-        // this.userData.accountType = this.isLoggedIn ? "Customer" : "Food Provider";
-        // this.userData.email = "virtual.bjorn@gmail.com";
-        // this.userData.fullName = "Bryan Jim Paano";
-        // this.userData.contactNumber = "+639123456789";
-        // this.userData.password = "12345678";
-        // this.userData.confirmPassword = "12345678";
-        // this.userData.deliveryAddress = "Bldg 42-6/F PAT Bldg";
-        // userDataService.updateUserData(this.userData);
     }
 
     isValidated(): boolean {
-        if (!this.userData.fullName) {
-            dialogs.alert({ message: 'Please enter a valid name.', okButtonText: 'OK' });
+        if (!this.userData.firstName) {
+            dialogs.alert({ message: 'Please enter a valid first name.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.contactNumber) {
+        } else if (!this.userData.middleName) {
+            dialogs.alert({ message: 'Please enter a valid middle name.', okButtonText: 'OK' });
+            return false;
+        } else if (!this.userData.lastName) {
+            dialogs.alert({ message: 'Please enter a valid last name.', okButtonText: 'OK' });
+            return false;
+        } else if (!this.userData.contactNo) {
             dialogs.alert({ message: 'Please enter a valid contact number.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.password) {
+        } else if (!this.userData.password) {
             dialogs.alert({ message: 'Please enter a valid password.', okButtonText: 'OK' });
             return false;
-        }
-        if (!this.userData.confirmPassword) {
+        } else if (!this.userData.confirmPassword) {
             dialogs.alert({ message: 'Please re-enter your password.', okButtonText: 'OK' });
             return false;
         }
@@ -69,7 +66,22 @@ export class AccountComponent {
         }
     }
 
+    async updateAccountData() {
+        if (this.userData.password == this.userData.confirmPassword) {
+            this.userDataService.updateUserData(this.userData);
+            let updateResponse = await this._ngFire.updateUserData(this.userData);
+            dialogs.alert({ message: updateResponse.message, okButtonText: 'OK' })
+            console.dir(updateResponse);
+        } else {
+            dialogs.alert({ message: "The passwords does not match!", okButtonText: 'OK' })
+        }
+    }
+
     onEditButton(textField: TextField) {
         textField.editable = !textField.editable;
+    }
+
+    trackByIndex(index: number, obj: any): any {
+        return index;
     }
 }

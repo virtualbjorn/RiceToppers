@@ -25,8 +25,7 @@ export class FoodMenuService {
     public async setFoodMenuData(): Promise<boolean> {
         if (connectivity.getConnectionType() > 0) {
             this.isFoodMenuParsed = false;
-            let result = await firebase.firestore.collection('food-outlet').doc('cAAFrBzaWqPMQ40qosPo1w8fKst1').get();
-            // console.dir(result);
+            let result = await firebase.firestore.collection('food-menu').doc('c7XF1A8j1JX0mVemGBS7f7aKHcx1').get();
             if (result.exists) {
                 this.foodMenuArray = JSON.parse(JSON.stringify(result.data()));
                 this.foodMenuData = new Array<FoodMenuData>();

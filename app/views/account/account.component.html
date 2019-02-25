@@ -12,36 +12,50 @@
             </AbsoluteLayout>
             <GridLayout columns="4*, 5*">
                 <Label text="Account Type" col="0" textWrap="true" class="textfield-label"></Label>
-                <TextField col="1" hint="Customer" [(ngModel)]="userData.accountType" editable="false" required></TextField>
+                <TextField col="1" hint="Customer" text="{{userData.accountType | titlecase }}" editable="false"
+                    required>
+                </TextField>
             </GridLayout>
             <Label text="Email Address" textWrap="true" class="textfield-label"></Label>
-            <TextField hint="Email Address" [(ngModel)]="userData.email" keyboardType="email" editable="false"
-                required #emailAddressTextField></TextField>
-            <Label text="Full Name" textWrap="true" class="textfield-label"></Label>
+            <TextField hint="Email Address" [(ngModel)]="userData.email" keyboardType="email" editable="false" required
+                #emailAddressTextField></TextField>
+            <Label text="First Name" textWrap="true" class="textfield-label"></Label>
             <GridLayout columns="*, auto">
-                <TextField colSpan="2" hint="Name" [(ngModel)]="userData.fullName" editable="false" required
-                    #fullNameTextField></TextField>
-                <Button col="1" text="{{!fullNameTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
-                    (tap)="onEditButton(fullNameTextField)"></Button>
+                <TextField colSpan="2" hint="Name" [(ngModel)]="userData.firstName" editable="false" required
+                    #firstNameTextField></TextField>
+                <Button col="1" text="{{!firstNameTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto"
+                    class="fa textfield-edit-button" (tap)="onEditButton(firstNameTextField)"></Button>
+            </GridLayout>
+            <Label text="Middle Name" textWrap="true" class="textfield-label"></Label>
+            <GridLayout columns="*, auto">
+                <TextField colSpan="2" hint="Name" [(ngModel)]="userData.middleName" editable="false" required
+                    #middleNameTextField></TextField>
+                <Button col="1" text="{{!middleNameTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto"
+                    class="fa textfield-edit-button" (tap)="onEditButton(middleNameTextField)"></Button>
+            </GridLayout>
+            <Label text="Last Name" textWrap="true" class="textfield-label"></Label>
+            <GridLayout columns="*, auto">
+                <TextField colSpan="2" hint="Name" [(ngModel)]="userData.lastName" editable="false" required
+                    #lastNameTextField></TextField>
+                <Button col="1" text="{{!lastNameTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto"
+                    class="fa textfield-edit-button" (tap)="onEditButton(lastNameTextField)"></Button>
             </GridLayout>
             <Label text="Contact Number" textWrap="true" class="textfield-label"></Label>
             <GridLayout columns="*, auto">
-                <TextField colSpan="2" hint="Contact Number" [(ngModel)]="userData.contactNumber" keyboardType="number"
-                    editable="false" required #contactNumberTextField></TextField>
-                <Button col="1" text="{{!contactNumberTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
-                    (tap)="onEditButton(contactNumberTextField)"></Button>
+                <TextField colSpan="2" hint="Contact Number" [(ngModel)]="userData.contactNo" keyboardType="number"
+                    editable="false" required #contactNoTextField></TextField>
+                <Button col="1" text="{{!contactNoTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto"
+                    class="fa textfield-edit-button" (tap)="onEditButton(contactNoTextField)"></Button>
             </GridLayout>
-            <Label text="Delivery Address" textWrap="true" class="textfield-label"></Label>
-            <TextView hint="Delivery Address" textWrap="true" [(ngModel)]="userData.deliveryAddress" required></TextView>
+            <Label text="Address" textWrap="true" class="textfield-label"></Label>
+            <TextView *ngFor="let address of userData.address; let i = index; trackBy:trackByIndex" hint="Address" textWrap="true"
+                [(ngModel)]="userData.address[i]" required></TextView>
             <Label text="Password" textWrap="true" class="textfield-label"></Label>
-            <GridLayout columns="*, auto">
-                <TextField colSpan="2" hint="Password" [(ngModel)]="userData.password" secure="true" editable="false"
-                    required #passwordTextField></TextField>
-                <Button col="1" text="{{!passwordTextField.editable ? '&#xf304;' : '&#xf00d;'}}" left="auto" class="fa textfield-edit-button"
-                    (tap)="onEditButton(passwordTextField)"></Button>
-            </GridLayout>
+            <TextField hint="Password" [(ngModel)]="userData.password" secure="true" editable="false" required
+                #passwordTextField></TextField>
             <Label text="* Confirm Password" textWrap="true" class="textfield-label"></Label>
-            <TextField hint="Confirm Password" [(ngModel)]="userData.confirmPassword" secure="true" required></TextField>
+            <TextField hint="Confirm Password" [(ngModel)]="userData.confirmPassword" secure="true" required>
+            </TextField>
             <Button text="Update" (tap)="updateAccountData()" class="button"></Button>
         </StackLayout>
     </ScrollView>
